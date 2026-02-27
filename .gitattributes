@@ -1,0 +1,4 @@
+# 确保中文件名正确处理 UTF-8 编码
+# Ensure UTF-8 encoded filenames are handled correctly
+
+* text=auto eol=lf
