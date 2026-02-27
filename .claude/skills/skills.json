@@ -1,0 +1,123 @@
+{
+  "version": "1.0",
+  "created_at": "2026-02-27T06:00:00Z",
+  "updated_at": "2026-02-27T06:00:00Z",
+  "skills": [
+    {
+      "id": "skill-figma-html",
+      "name": "skill-figma-html",
+      "name_zh": "技能-Figma转HTML",
+      "type": "normal",
+      "category": "conversion",
+      "status": "active",
+      "description": "将Figma设计转换为HTML代码",
+      "dependencies": [],
+      "input_spec": {
+        "type": "text",
+        "description": "纯文本Figma导出"
+      },
+      "output_spec": {
+        "type": "code",
+        "format": "HTML files"
+      }
+    },
+    {
+      "id": "元-skill-生成器",
+      "name": "元-skill-生成器",
+      "name_zh": "元-Skill生成器",
+      "type": "meta",
+      "category": "generator",
+      "status": "active",
+      "description": "基于规则自动生成新技能",
+      "dependencies": [],
+      "input_spec": {
+        "type": "natural_language",
+        "description": "中文自然语言问题描述"
+      },
+      "output_spec": {
+        "type": "skill_package",
+        "format": "skill directory structure",
+        "markdown_table": "| ID | 名称 | 描述 | 类型 | 状态 | 最后更新 |
+|---|---|---|------|--------|--------|
+| skill-figma-html | 技能-Figma转HTML | normal | conversion | active | - |
+| 元-skill-生成器 | 元-Skill生成器 | meta | generator | active | - |
+| 元-skill-检查器 | 元-Skill检查器 | meta | checker | active | - |
+| 元-skill-优化器 | 元-Skill优化器 | meta | optimizer | active | - |
+| 元-skill-问题穷举器 | 元-Skill问题穷举器 | meta | enumerator | active | - |
+| 元-skill-修复器 | 元-Skill修复器 | meta | fixer | active | - |
+| 元-skill-group | 元-Skill技能组 | meta | group | active | - |"
+    },
+    {
+      "id": "元-skill-检查器",
+      "name": "元-skill-检查器",
+      "name_zh": "元-Skill检查器",
+      "type": "meta",
+      "category": "checker",
+      "status": "active",
+      "description": "验证技能是否符合10分钟原则和命名约定",
+      "dependencies": [],
+      "input_spec": {
+        "type": "skill_path",
+        "description": "技能目录路径"
+      },
+      "output_spec": {
+        "type": "compliance_report",
+        "format": "JSON report"
+      }
+    },
+    {
+      "id": "元-skill-优化器",
+      "name": "元-skill-优化器",
+      "name_zh": "元-Skill优化器",
+      "type": "meta",
+      "category": "optimizer",
+      "status": "active",
+      "description": "分析和优化技能",
+      "dependencies": [],
+      "input_spec": {
+        "type": "fixer_output",
+        "description": "修复器输出目录"
+      },
+      "output_spec": {
+        "type": "optimization_plan",
+        "format": "markdown report"
+      }
+    },
+    {
+      "id": "元-skill-修复器",
+      "name": "元-skill-修复器",
+      "name_zh": "元-Skill修复器",
+      "type": "meta",
+      "category": "fixer",
+      "status": "active",
+      "description": "自动修复技能中的问题",
+      "dependencies": [],
+      "input_spec": {
+        "type": "skill_path",
+        "description": "待修复的技能目录"
+      },
+      "output_spec": {
+        "type": "fix_result",
+        "format": "JSON/Markdown"
+      }
+    },
+    {
+      "id": "元-skill-问题穷举器",
+      "name": "元-skill-问题穷举器",
+      "name_zh": "元-Skill问题穷举器",
+      "type": "meta",
+      "category": "enumerator",
+      "status": "active",
+      "description": "对问题进行无限横向或纵向穷举",
+      "dependencies": [],
+      "input_spec": {
+        "type": "natural_language",
+        "description": "中文自然语言问题描述"
+      },
+      "output_spec": {
+        "type": "enumeration_data",
+        "format": "checkpoint JSON + markdown lists"
+      }
+    }
+  ]
+}
