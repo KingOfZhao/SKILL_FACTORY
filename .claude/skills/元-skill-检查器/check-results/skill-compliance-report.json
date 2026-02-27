@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-02-27T04:13:28Z",
+  "skills_directory": "/Users/administruter/Desktop/skill_factory/.claude/skills",
+  "total_skills": 8,
+  "meta_skills_excluded": 6,
+  "non_meta_skills_checked": 1,
+  "er_suffix_detected": 0,
+  "summary": {
+    "passed": 1,
+    "warnings": 0,
+    "failed": 0
+  },
+  "skills": [
+    {
+      "name": "skill-figma-html",
+      "path": "/Users/administruter/Desktop/skill_factory/.claude/skills/skill-figma-html",
+      "status": "passed",
+      "missing_items": [
+        "verify.sh 脚本不存在",
+        "缺少 '10 分钟快速验证指南' 章节",
+        "缺少 '验证步骤' 说明",
+        "缺少时间约束说明（≤ 10 分钟）",
+        "缺少 '成功标志' 说明",
+        "缺少 '失败场景' 说明",
+        "缺少 '预期结果' 说明"
+      ],
+      "suggestions": [
+        "添加 verify.sh 验证脚本",
+        "在 SKILL.md 中添加 '10 分钟快速验证指南' 章节"
+      ]
+    }
+  ]
+}

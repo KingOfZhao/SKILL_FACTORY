@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# skill-优化器自带验证脚本
+# 元-Skill 优化器自带验证脚本
 
 set -euo pipefail
 
@@ -84,8 +84,15 @@ check_required_fields() {
 
 # 主验证流程
 main() {
-    echo "=== skill-优化器验证 ==="
+    local output_dir="${1:-output}"
+
+    echo "=== 元-Skill 优化器验证 ==="
     echo ""
+
+    cd "$output_dir" 2>/dev/null || {
+        echo -e "${RED}错误: 输出目录不存在: $output_dir${NC}"
+        exit 1
+    }
 
     # 检查基础文件
     check_file "analysis.json" "分析文件"
@@ -100,7 +107,7 @@ main() {
 
     # 检查 analysis.json 必需字段
     if [[ -f "analysis.json" ]]; then
-        check_required_fields "analysis.json" "timestamp target recommended_extensions" "分析文件必需字段"
+        check_required_fields "analysis.json" "timestamp target issues_count warnings_count" "分析文件必需字段"
     fi
 
     # 检查 checksum 文件
@@ -113,7 +120,7 @@ main() {
 
     # 检查扩展方案数量
     if [[ -d "extension-plans" ]]; then
-        local count=$(ls -1 extension-plans/ | wc -l | tr -d ' ')
+        local count=$(ls -1 extension-plans/ 2>/dev/null | wc -l | tr -d ' ')
         if [[ $count -ge 1 ]]; then
             echo -e "${GREEN}✓${NC} 拓展方案: 包含 $count 个方案"
             ((PASS++))

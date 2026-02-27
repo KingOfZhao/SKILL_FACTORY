@@ -16,6 +16,7 @@ EXTEND_TYPES=""
 ENHANCE_FIXER=false
 MAX_SKILLS=3
 OUTPUT_DIR="output"
+VERIFY_ONLY=false
 TARGET=""
 
 # 解析参数
@@ -37,6 +38,10 @@ while [[ $# -gt 0 ]]; do
             OUTPUT_DIR="$2"
             shift 2
             ;;
+        --verify)
+            VERIFY_ONLY=true
+            shift
+            ;;
         -*)
             echo "未知选项: $1"
             exit 1
@@ -49,18 +54,32 @@ while [[ $# -gt 0 ]]; do
 done
 
 # 验证参数
-if [[ -z "$TARGET" ]]; then
+if [[ "$VERIFY_ONLY" == false ]] && [[ -z "$TARGET" ]]; then
     echo -e "${RED}错误: 请指定修复结果目录${NC}"
     exit 1
 fi
 
-if [[ ! -d "$TARGET" ]]; then
+if [[ "$VERIFY_ONLY" == false ]] && [[ -n "$TARGET" ]] && [[ ! -d "$TARGET" ]]; then
     echo -e "${RED}错误: 目标目录不存在: $TARGET${NC}"
     exit 1
 fi
 
 # 防止优化自身
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# 如果是验证模式，直接运行验证
+if [[ "$VERIFY_ONLY" == true ]]; then
+    # 检查 verify.sh 是否存在
+    local verify_script="$SCRIPT_DIR/verify.sh"
+    if [[ ! -f "$verify_script" ]]; then
+        echo -e "${RED}错误: verify.sh 不存在${NC}"
+        exit 1
+    fi
+    chmod +x "$verify_script"
+    bash "$verify_script" "$OUTPUT_DIR"
+    exit $?
+fi
+
 if [[ "$(cd "$TARGET/.." && pwd)" == "$(cd "$SCRIPT_DIR/.." && pwd)" ]]; then
     echo -e "${RED}错误: 不能优化本 skill 自身的修复结果${NC}"
     exit 1

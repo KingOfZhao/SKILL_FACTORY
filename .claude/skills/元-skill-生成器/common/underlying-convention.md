@@ -15,7 +15,7 @@
 
 ## 3. 通用最佳实践（所有 Skill 必须遵守）
 - 单一职责原则：一个 Skill 只解决一个明确问题域
-- 文件夹命名：kebab-case
+- 文件夹命名：kebab-case（kebab-case 命名，避免中文 "er" 后缀如 "优化er"、"修复er"，应使用统一的元-skill 架构如 "元-skill-优化器"）
 - SKILL.md 控制在 400 行以内
 - 所有脚本 JSON I/O + 全面错误处理
 - 生成后自动存入 待应用-skill/
