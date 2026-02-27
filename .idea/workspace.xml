@@ -3,5 +3,62 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
-  <component name="PropertiesComponent">{}</component>
+  <component name="ChangeListManager">
+    <list default="true" id="1ae1e3d2-1fc8-4a3e-a1d8-7e0a78cc14fb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.claude/skills/skills.json" beforeDir="false" afterPath="$PROJECT_DIR$/.claude/skills/skills.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.claude/skills/元/元-skill-优化器/SKILL.md" beforeDir="false" afterPath="$PROJECT_DIR$/.claude/skills/元/元-skill-优化器/SKILL.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.claude/skills/元/元-skill-检查er/scripts/checker.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.claude/skills/元/元-skill-检查器/SKILL.md" beforeDir="false" afterPath="$PROJECT_DIR$/.claude/skills/元/元-skill-检查器/SKILL.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.claude/skills/元/元-skill-生成器/common/underlying-convention.md" beforeDir="false" afterPath="$PROJECT_DIR$/.claude/skills/元/元-skill-生成器/common/underlying-convention.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="3AEwdjb1b4l9TE7qUDw1NUQVHG2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/administruter/Desktop/skill_factory",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="SwiftWorkspaceSettings">
+    <option name="detectedToolchain" value="true" />
+    <option name="toolchainPathValue" value="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1ae1e3d2-1fc8-4a3e-a1d8-7e0a78cc14fb" name="Changes" comment="" />
+      <created>1772171127046</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1772171127046</updated>
+    </task>
+    <servers />
+  </component>
 </project>
