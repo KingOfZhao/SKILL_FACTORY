@@ -1,93 +1,112 @@
 ---
 name: 元-skill-检查器
-description: 检查所有非元-前缀的 skill 是否符合 10 分钟可验证原则
+description: 按照底层约定检查所有 Skill，自动区分元 Skill / 非元 Skill / 非 Skill 内容
 ---
 
-# 元-Skill 检查器
+# 元-Skill 检查器（v1.1）
 
-## 能力定义
-
-扫描指定 skills 目录，识别所有不带"元-"前缀的 skill，并对每个 skill 验证是否符合 10 分钟可验证原则。
-
-### 验证维度
-
-1. **文件完整性**
-   - 检查 SKILL.md 文件存在
-   - 检查目录结构完整
-
-2. **内容结构**
-   - 检查 SKILL.md 包含"10 分钟快速验证指南"章节
-   - 检查有明确的验证步骤（≤ 5 步）
-   - 检查有时间约束说明（≤ 10 分钟）
-
-3. **验证机制**
-   - 检查是否有 verify.sh 或类似验证脚本
-   - 检查是否有自校验机制（checksum、成功标志）
-
-4. **失败处理**
-   - 检查是否有清晰的失败场景说明
-   - 检查是否有预期结果描述
-
-5. **输出可验证性**
-   - 检查输出格式是否可直接对比/检查
-   - 检查是否有独立的快速验证指南
+## Capabilities（单一职责）
+- 扫描指定目录
+- 自动识别：元 Skill / 非元 Skill / 非 Skill 内容
+- 严格按照 underlying-convention.md 中的 rules YAML 块进行检查
+- 生成结构化合规报告
 
 ## 执行前必须读取
 common/underlying-convention.md
 
-## 执行流程（5 步骤）
+## 执行流程（6 步骤）
 
 ```
-1. 扫描 skills 目录，识别所有非元-前缀 skill
-2. 对每个 skill 进行 5 维度验证
-3. 收集验证结果（通过/警告/失败）
-4. 生成 JSON 格式报告
-5. 输出到 check-results/
+1. 读取底层约定中的 rules YAML 块
+2. 扫描目录，分类每个目录/文件：
+   - 元 Skill（以 "元-" 开头或包含 meta 关键词）
+   - 非元 Skill（普通技能）
+   - 非 Skill 内容（其他文件/文件夹）
+3. 对**非元 Skill** 执行完整 10 分钟验证检查
+4. 对**元 Skill** 只检查命名、结构、MCP 声明等通用规则（豁免 10 分钟验证）
+5. 对**非 Skill** 内容只做警告提示
+6. 输出 JSON 报告 + Markdown 总结
 ```
 
-## 输出格式
+## 分类判断逻辑
 
-`check-results/skill-compliance-report.json`:
+### 1. 元 Skill 识别
+- 文件夹名称以 `元-` 开头
+- SKILL.md 的 name/description 包含 `元`、`meta`、`生成器`、`enumerator`、`profiler`、`检查器`、`扫描器`、`穷举器`、`修复器`、`优化器` 等关键词
+- **豁免范围**：10 分钟验证原则检查
+
+### 2. 非元 Skill 识别
+- 文件夹名称不以 `元-` 开头
+- 不包含上述 meta 关键词
+- **强制检查**：10 分钟验证原则（完整的 5 维度检查）
+
+### 3. 非 Skill 内容识别
+- 不含 SKILL.md 的目录
+- 非 Markdown/代码文件
+- **处理方式**：仅警告，不执行检查
+
+## 输出格式（check-results/skill-compliance-report.json）
 
 ```json
 {
-  "timestamp": "2026-02-27T12:00:00Z",
-  "total_skills": 5,
-  "meta_skills_excluded": 4,
-  "non_meta_skills_checked": 2,
+  "scan_info": {
+    "timestamp": "2026-02-27T16:30:00Z",
+    "scan_path": "/path/to/skills",
+    "total_items": 10
+  },
+  "classification": {
+    "meta_skills": {
+      "count": 5,
+      "checked": true,
+      "validation_mode": "basic_only"
+    },
+    "non_meta_skills": {
+      "count": 3,
+      "checked": true,
+      "validation_mode": "full_10min_validation"
+    },
+    "non_skill_content": {
+      "count": 2,
+      "checked": false,
+      "warning_only": true
+    }
+  },
+  "rule_source": "underlying-convention.md",
   "summary": {
-    "passed": 0,
+    "total_checked": 8,
+    "passed": 6,
     "warnings": 1,
     "failed": 1
   },
   "skills": [
     {
-      "name": "skill-figma-html",
-      "path": "/path/to/skill-figma-html",
+      "item_name": "元-skill-生成器",
+      "skill_type": "meta",
+      "status": "passed",
+      "checked_dimensions": ["naming", "structure", "mcp_declaration"],
+      "violations": [],
+      "exemptions": ["10min_validation"]
+    },
+    {
+      "item_name": "skill-figma-html",
+      "skill_type": "non_meta",
       "status": "warning",
-      "missing_items": [
+      "checked_dimensions": ["file_integrity", "content_structure", "validation_mechanism", "failure_handling", "output_verifiability"],
+      "violations": [
         "verify.sh script not found",
         "failure scenarios not documented"
       ],
+      "exemptions": [],
       "suggestions": [
         "Add verify.sh script for automated verification",
         "Document failure scenarios in SKILL.md"
       ]
-    },
+    }
+  ],
+  "non_skill_warnings": [
     {
-      "name": "skill-优化er",
-      "path": "/path/to/skill-优化er",
-      "status": "failed",
-      "missing_items": [
-        "10-minute verification guide not found",
-        "no success flag mechanism",
-        "output format not clearly defined"
-      ],
-      "suggestions": [
-        "Add '10 分钟快速验证指南' section to SKILL.md",
-        "Implement success flag in output",
-        "Define clear output verification steps"
-      ]
+      "item_name": "docs/",
+      "warning": "Non-skill content detected, skipped"
     }
   ]
 }
@@ -95,54 +114,61 @@ common/underlying-convention.md
 
 ## 10 分钟快速验证指南
 
+**本检查器自身为元 Skill，豁免 10 分钟验证原则**
+
 ### 验证步骤
 
-1. **运行检查器**（<2 分钟）
+1. **运行检查器**（<1 分钟）
    ```bash
    /元-skill-检查器
+   # 默认扫描: /Users/administruter/Desktop/skill_factory/.claude/skills/
    ```
 
-2. **检查输出文件**（<2 分钟）
+2. **查看 check-results/skill-compliance-report.json**（<3 分钟）
    ```bash
    cat check-results/skill-compliance-report.json | jq .
    ```
 
-3. **验证 JSON 格式**（<2 分钟）
-   ```bash
-   jq empty check-results/skill-compliance-report.json
-   ```
-
-4. **检查必需字段**（<2 分钟）
-   ```bash
-   jq 'has("timestamp") and has("skills") and has("summary")' check-results/skill-compliance-report.json
-   # 预期: true
-   ```
-
-5. **查看汇总结果**（<2 分钟）
+3. **查看 summary.passed / warnings / failed**（<1 分钟）
    ```bash
    jq '.summary' check-results/skill-compliance-report.json
    ```
 
+4. **验证分类统计**（<2 分钟）
+   ```bash
+   jq '.classification' check-results/skill-compliance-report.json
+   ```
+   预期：meta_skills / non_meta_skills / non_skill_content 都有正确统计
+
+5. **检查元 Skill 的豁免是否正确应用**（<3 分钟）
+   ```bash
+   jq '.skills[] | select(.skill_type=="meta") | .exemptions' check-results/skill-compliance-report.json
+   ```
+   预期：exemptions 包含 "10min_validation"
+
 **总耗时：≤ 10 分钟**
 
 成功标志：
-- JSON 格式正确
-- summary 字段包含 passed/warnings/failed
-- skills 数组包含每个非元-skill 的验证结果
+- JSON 包含 skill_type 和 rule_source 字段
+- classification 正确区分三类内容
+- meta Skills 的 exemptions 包含 "10min_validation"
+- non_meta Skills 执行了完整的 5 维度检查
 
 ### 失败场景
 
-- **skills 目录不存在** → 错误："指定目录不存在"
+- **目标目录不存在** → 错误："指定目录不存在"
 - **无权限访问** → 错误："权限不足"
 - **JSON 生成失败** → 错误："报告生成失败"
+- **底层约定读取失败** → 错误："无法读取 underlying-convention.md"
 
 ## Limitations（必须声明）
 
-- 本 Skill 只负责静态检查，不实际执行被检查的 skill
+- 本 Skill 只负责静态检查，不执行 skill 实际功能
 - 检查结果基于文件内容和结构分析，不验证实际运行效果
-- 元-前缀的 skill 自动跳过检查（meta-skill 不受 10 分钟原则约束）
-- 依赖 SKILL.md 内容的规范性
+- 元 Skill 自动豁免 10 分钟验证原则
+- 依赖底层约定中的 rules YAML 块准确性
 - 不修改被检查的 skill 文件
+- 非 Skill 内容仅警告，不执行检查
 
 ## 使用方法
 
@@ -165,4 +191,15 @@ common/underlying-convention.md
 ### 输出详细模式
 ```bash
 /元-skill-检查器 --verbose
+```
+
+### 仅检查非元 Skill
+```bash
+/元-skill-检查器 --non-meta-only
+```
+
+## 输出文件位置
+```
+check-results/
+└── skill-compliance-report.json    # 合规报告
 ```

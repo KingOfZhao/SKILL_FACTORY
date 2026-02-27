@@ -1,0 +1,240 @@
+{
+  "scan_info": {
+    "path": "/Users/administruter/Desktop/skill_factory/.claude/skills/元/",
+    "relative_path": ".claude/skills/元/",
+    "timestamp": "2026-02-27T16:20:00Z",
+    "total_skills": 6,
+    "total_sub_skills": 37
+  },
+  "tree_structure": {
+    "name": "skills",
+    "path": ".claude/skills",
+    "children": [
+      {
+        "name": "元",
+        "path": ".claude/skills/元/",
+        "type": "meta-container",
+        "children": [
+          {
+            "name": "元-skill-生成器",
+            "path": ".claude/skills/元/元-skill-生成器/",
+            "has_skill_file": true,
+            "type": "meta",
+            "category": "generator",
+            "description": "基于规则自动生成新技能",
+            "has_description": true,
+            "has_overlaps": true,
+            "has_output": true,
+            "sub_skills": {
+                "total": 36,
+                "categories": {
+                  "flutter_factory": {
+                    "path": "待应用-skill/flutter_factory",
+                    "count": 30,
+                    "layers": [
+                      "1-requirements-layer",
+                      "2-architecture-layer",
+                      "3-ui-layer",
+                      "4-data-layer",
+                      "5-testing-layer",
+                      "6-deployment-layer"
+                    ]
+                  },
+                  "skill-catalog-scanner": {
+                    "path": "待应用-skill/skill-catalog-scanner",
+                    "count": 1
+                  }
+                }
+            }
+          },
+          {
+            "name": "元-skill-检查器",
+            "path": ".claude/skills/元/元-skill-检查器/",
+            "has_skill_file": true,
+            "type": "meta",
+            "category": "checker",
+            "description": "检查所有非元-前缀的 skill 是否符合 10 分钟可验证原则",
+            "has_description": true,
+            "has_output": true
+          },
+          {
+            "name": "元-skill-优化器",
+            "path": ".claude/skills/元/元-skill-优化器/",
+            "has_skill_file": true,
+            "type": "meta",
+            "category": "optimizer",
+            "description": "分析和优化技能",
+            "has_output": true
+          },
+          {
+            "name": "元-skill-问题穷举器",
+            "path": ".claude/skills/元/元-skill-问题穷举器/",
+            "has_skill_file": true,
+            "type": "meta",
+            "category": "enumerator",
+            "description": "对问题进行无限横向或纵向穷举",
+            "has_output": true
+          },
+          {
+            "name": "元-skill-修复器",
+            "path": ".claude/skills/元/元-skill-修复器/",
+            "has_skill_file": true,
+            "type": "meta",
+            "category": "fixer",
+            "description": "自动修复技能中的问题"
+          },
+          {
+            "name": "元-skill-扫描器",
+            "path": ".claude/skills/元/元-skill-扫描器/",
+            "has_skill_file": true,
+            "type": "meta",
+            "category": "scanner",
+            "description": "扫描指定文件夹下的所有 skills，生成能力清单和树状结构",
+            "has_output": true
+          }
+        ]
+      }
+    ]
+  },
+  "skills_list": [
+    {
+      "path": ".claude/skills/元/元-skill-生成器/",
+      "name": "元-Skill生成器",
+      "name_en": "元-skill-生成器",
+      "type": "meta",
+      "category": "generator",
+      "description": "基于规则自动生成新技能",
+      "has_description": true,
+      "has_overlaps": true,
+      "has_output": true,
+      "status": "active"
+    },
+    {
+      "path": ".claude/skills/元/元-skill-检查器/",
+      "name": "元-Skill检查器",
+      "name_en": "元-skill-检查器",
+      "type": "meta",
+      "category": "checker",
+      "description": "检查所有非元-前缀的 skill 是否符合 10 分钟可验证原则",
+      "has_description": true,
+      "has_output": true,
+      "status": "active"
+    },
+    {
+      "path": ".claude/skills/元/元-skill-优化器/",
+      "name": "元-Skill优化器",
+      "name_en": "元-skill-优化器",
+      "type": "meta",
+      "category": "optimizer",
+      "description": "分析和优化技能",
+      "has_output": true,
+      "status": "active"
+    },
+    {
+      "path": ".claude/skills/元/元-skill-问题穷举器/",
+      "name": "元-Skill问题穷举器",
+      "name_en": "元-skill-问题穷举器",
+      "type": "meta",
+      "category": "enumerator",
+      "description": "对问题进行无限横向或纵向穷举",
+      "has_output": true,
+      "status": "active"
+    },
+    {
+      "path": ".claude/skills/元/元-skill-修复器/",
+      "name": "元-Skill修复器",
+      "name_en": "元-skill-修复器",
+      "type": "meta",
+      "category": "fixer",
+      "description": "自动修复技能中的问题",
+      "status": "active"
+    },
+    {
+      "path": ".claude/skills/元/元-skill-扫描器/",
+      "name": "元-Skill扫描器",
+      "name_en": "元-skill-扫描器",
+      "type": "meta",
+      "category": "scanner",
+      "description": "扫描指定文件夹下的所有 skills，生成能力清单和树状结构，用于 Claude Code 读取和调用",
+      "has_output": true,
+      "status": "active"
+    }
+  ],
+  "flutter_factory_skills": {
+    "total": 30,
+    "layers": [
+      {
+        "id": "1-requirements-layer",
+        "name": "需求分析层",
+        "count": 5,
+        "skills": [
+          "flutter-nlp-requirements-extractor",
+          "flutter-ml-requirement-prioritizer",
+          "flutter-voice-requirement-capture",
+          "flutter-image-to-spec-converter",
+          "flutter-conflict-detector"
+        ]
+      },
+      {
+        "id": "2-architecture-layer",
+        "name": "架构设计层",
+        "count": 5,
+        "skills": [
+          "flutter-clean-architecture-architect",
+          "flutter-micro-frontend-planner",
+          "flutter-hybrid-native-bridge-designer",
+          "flutter-graphql-schema-designer",
+          "flutter-web3-blockchain-integrator"
+        ]
+      },
+      {
+        "id": "3-ui-layer",
+        "name": "UI层构建层",
+        "count": 5,
+        "skills": [
+          "flutter-design-token-generator",
+          "flutter-responsive-layout-adapter",
+          "flutter-component-library-organizer",
+          "flutter-lottie-animation-integrator",
+          "flutter-three-d-viewer-builder"
+        ]
+      },
+      {
+        "id": "4-data-layer",
+        "name": "数据层构建层",
+        "count": 5,
+        "skills": [
+          "flutter-websocket-manager",
+          "flutter-graphql-client-builder",
+          "flutter-sqlite-optimizer",
+          "flutter-background-sync-handler",
+          "flutter-crypto-data-encryptor"
+        ]
+      },
+      {
+        "id": "5-testing-layer",
+        "name": "测试与优化层",
+        "count": 5,
+        "skills": [
+          "flutter-golden-test-generator",
+          "flutter-integration-test-builder",
+          "flutter-performance-metrics-collector",
+          "flutter-memory-leak-detector",
+          "flutter-a11y-e2e-tester"
+        ]
+      },
+      {
+        "id": "6-deployment-layer",
+        "name": "构建/部署层",
+        "count": 5,
+        "skills": [
+          "flutter-codesign-helper",
+          "flutter-firebase-app-distributor",
+          "flutter-gitlab-ci-generator",
+          "flutter-docker-builder",
+          "flutter-k8s-deployer"
+        ]
+      }
+    ]
+  }
+}

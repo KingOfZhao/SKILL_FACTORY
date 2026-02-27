@@ -1,0 +1,108 @@
+{
+  "diagnosis_info": {
+    "checker_version": "1.1",
+    "scan_time": "2026-02-27T17:30:00Z",
+    "scan_path": ".claude/skills/元/"
+    "total_items": 9
+  },
+  "classification": {
+    "meta_skills": {
+      "count": 6,
+      "items": [
+        "元-skill-生成器",
+        "元-skill-检查器",
+        "元-skill-优化器",
+        "元-skill-问题穷举器",
+        "元-skill-修复器",
+        "元-skill-orchestrator"
+      ]
+    },
+    "non_meta_skills": {
+      "count": 0,
+      "items": []
+    },
+    "non_skill_content": {
+      "count": 1,
+      "items": ["skill-catalog-scanner"]
+    }
+  },
+  "issues_found": [
+    {
+      "id": "ISS-001",
+      "severity": "info",
+      "category": "architecture",
+      "item": "元-skill-orchestrator",
+      "description": "新增的编排器需要与其他环节的集成验证",
+      "impact": "需要确保数据流转正确"
+    },
+    {
+      "id": "ISS-002",
+      "severity": "info",
+      "category": "integration",
+      "item": "全链路",
+      "description": "问题穷举器 → 生成器 → 扫描器 → 检查器 → 优化器的链路需要端到端测试",
+      "impact": "需要自动化集成验证"
+    },
+    {
+      "id": "ISS-003",
+      "severity": "info",
+      "category": "expansion",
+      "item": "技能覆盖",
+      "description": "当前元-skills 覆盖核心环节，但可能缺少特定领域的技能",
+      "impact": "需要根据实际需求动态扩展技能库"
+    },
+    {
+      "id": "ISS-004",
+      "severity": "suggestion",
+      "category": "usability",
+      "item": "输出标准化",
+      "description": "各环节输出格式需要进一步标准化以便机器读取",
+      "impact": "提升自动化程度"
+    },
+    {
+      "id": "ISS-005",
+      "severity": "suggestion",
+      "category": "documentation",
+      "item": "文档同步",
+      "description": "底层约定的更新需要同步到所有元-skills",
+      "impact": "确保规则一致性"
+    },
+    {
+      "id": "ISS-006",
+      "severity": "info",
+      "category": "validation",
+      "item": "检查器分类验证",
+      "description": "检查器的类型区分逻辑需要在实际场景中验证",
+      "impact": "确保准确识别三类内容"
+    },
+    {
+      "id": "ISS-007",
+      "severity": "suggestion",
+      "category": "optimization",
+      "item": "优化器执行模式",
+      "description": "优化器的 --auto-apply 模式需要提供更详细的 diff",
+      "impact": "提升用户确认体验"
+    },
+    {
+      "id": "ISS-008",
+      "severity": "info",
+      "category": "coordination",
+      "item": "元-skills 协作",
+      "description": "各元-skill 之间的数据流转和触发机制需要明确",
+      "impact": "减少手动操作"
+    }
+  ],
+  "patterns": {
+    "meta_skills": "结构完整，覆盖核心环节",
+    "integration": "链路已定义，需要验证",
+    "documentation": "底层规则已集中，需要应用"
+  },
+  "recommendations": [
+    "对问题穷举器进行功能拓展联想",
+    "优化现有元-skills 的输出格式",
+    "验证检查器的类型区分准确性",
+    "完善编排器的自动触发机制",
+    "统一各环节的错误处理和日志",
+    "建立元-skills 之间的数据流转标准"
+  ]
+}
