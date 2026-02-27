@@ -98,15 +98,14 @@ check_skill() {
     local skill_name="$1"
     local skill_dir="$2"
 
-    # 检查是否为中文 "er" 后缀的 skill（如 优化er, 修复er 等）
     if [[ "$skill_name" == *"优化er" ]] || [[ "$skill_name" == *"修复er" ]]; then
         ((er_suffix_detected++))
+
         if [[ "$VERBOSE" == true ]]; then
             echo -e "${BLUE}→${NC} 检查 $skill_name" >&2
             echo -e "  ${YELLOW}→ 发现中文 'er' 后缀${NC}" >&2
         fi
 
-        # 生成简单的 JSON 报告
         local base_name
         if [[ "$skill_name" == *"优化er" ]]; then
             base_name="优化"
@@ -115,9 +114,8 @@ check_skill() {
         else
             base_name="${skill_name%-er}"
         fi
-        local meta_skill_name="元-skill-${base_name}器"
 
-        # 检查是否存在对应的元-skill
+        local meta_skill_name="元-skill-${base_name}器"
         local status="warning"
         local missing_items=()
         local suggestions=()
@@ -141,46 +139,6 @@ check_skill() {
             fi
         fi
 
-        # 生成 JSON 对象（仅输出到 stdout）
-        local missing_json
-        local suggestions_json
-
-        # 手动构建 JSON 数组
-        if [[ ${#missing_items[@]} -eq 0 ]]; then
-            missing_json="[]"
-        else
-            missing_json="["
-            local first=true
-            for item in "${missing_items[@]}"; do
-                local escaped=$(echo "$item" | sed 's/\\/\\\\/g; s/"/\\"/g')
-                if [[ "$first" == true ]]; then
-                    missing_json="$missing_json\"$escaped\""
-                    first=false
-                else
-                    missing_json="$missing_json, \"$escaped\""
-                fi
-            done
-            missing_json="$missing_json]"
-        fi
-
-        if [[ ${#suggestions[@]} -eq 0 ]]; then
-            suggestions_json="[]"
-        else
-            suggestions_json="["
-            local first=true
-            for item in "${suggestions[@]}"; do
-                local escaped=$(echo "$item" | sed 's/\\/\\\\/g; s/"/\\"/g')
-                if [[ "$first" == true ]]; then
-                    suggestions_json="$suggestions_json\"$escaped\""
-                    first=false
-                else
-                    suggestions_json="$suggestions_json, \"$escaped\""
-                fi
-            done
-            suggestions_json="$suggestions_json]"
-        fi
-
-        # 构建 JSON 对象，包含新字段
         echo "    {
       \"name\": \"$skill_name\",
       \"path\": \"$skill_dir\",
@@ -190,29 +148,33 @@ check_skill() {
       \"suggested_action\": \"$suggested_action\",
       \"suggested_meta_skill\": \"$suggested_meta_skill\"
     }"
-    else
-        if [[ "$VERBOSE" == true ]]; then
-            echo -e "${BLUE}→${NC} 检查 $skill_name" >&2
+
+        continue
+
+    fi
+
+    if [[ "$VERBOSE" == true ]]; then
+        echo -e "${BLUE}→${NC} 检查 $skill_name" >&2
+    fi
+
+    local status="passed"
+    local missing_items=()
+    local suggestions=()
+
+    if ! check_file_exists "$skill_dir/SKILL.md"; then
+        status="failed"
+        missing_items+=("SKILL.md 文件不存在")
+        suggestions+=("创建 SKILL.md 文件")
+    fi
+
+    if ! check_verify_script "$skill_dir"; then
+        status="${status:-warning}"
+        missing_items+=("verify.sh 脚本不存在")
+        suggestions+=("添加 verify.sh 验证脚本")
         fi
 
-        local status="passed"
-        local missing_items=()
-        local suggestions=()
-
-        if ! check_file_exists "$skill_dir/SKILL.md"; then
-            status="failed"
-            missing_items+=("SKILL.md 文件不存在")
-            suggestions+=("创建 SKILL.md 文件")
-        fi
-
-        if ! check_verify_script "$skill_dir"; then
-            status="${status:-warning}"
-            missing_items+=("verify.sh 脚本不存在")
-            suggestions+=("添加 verify.sh 验证脚本")
-        fi
-
-        if [[ -f "$skill_dir/SKILL.md" ]]; then
-            local guide_missing_str
+    if [[ -f "$skill_dir/SKILL.md" ]]; then
+        local guide_missing_str
             guide_missing_str=$(check_verification_guide "$skill_dir" 2>/dev/null || true)
 
             if [[ -n "$guide_missing_str" ]]; then
@@ -235,13 +197,39 @@ check_skill() {
             fi
         fi
 
-        echo "    {
+    echo "    {
       \"name\": \"$skill_name\",
       \"path\": \"$skill_dir\",
       \"status\": \"$status\",
       \"missing_items\": $missing_json,
       \"suggestions\": $suggestions_json
     }"
+
+    local skill_json
+    skill_json=$(check_skill "$skill_name" "$skill_dir")
+
+    local skill_status
+    skill_status=$(echo "$skill_json" | grep -o '"status": "[^"]*"' | cut -d'"' -f4)
+
+    case $skill_status in
+        warning)
+            ((warnings++))
+            ;;
+        passed)
+            ((passed++))
+            ;;
+        failed)
+            ((failed++))
+            ;;
+    esac
+
+    if [[ "$FAILURES_ONLY" == false ]] || [[ "$skill_status" == "failed" ]]; then
+        if [[ -z "$skills_json" ]]; then
+            skills_json="$skill_json"
+        else
+            skills_json="$skills_json,$skill_json"
+        fi
+    fi
 }
 
 main() {
