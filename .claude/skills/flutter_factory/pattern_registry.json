@@ -1,0 +1,119 @@
+{
+  "version": "1.1",
+  "factory_name": "flutter-skill-factory",
+  "last_updated": "2026-02-27T19:15:00Z",
+  "dynamic_validation": {
+    "enabled": true,
+    "directory": "validation/",
+    "files_per_iteration": 4,
+    "file_types": [
+      "<iteration-id>-requirements.md",
+      "<iteration-id>-coverage.md",
+      "<iteration-id>-verification-plan.md",
+      "<iteration-id>-test-cases.md"
+    ]
+  },
+  "patterns": [
+    {
+      "id": "bluetooth-pattern",
+      "name": "蓝牙通信模式",
+      "category": "communication",
+      "file": "patterns/bluetooth-pattern.md",
+      "pdf_coverage": {
+        "bluetooth_scan": true,
+        "connection": true,
+        "rssi": true,
+        "exception_handling": true
+      },
+      "tags": ["ble", "flutter_blue_plus", "rssi", "stream"],
+      "complexity": "high"
+    },
+    {
+      "id": "state-management-pattern",
+      "name": "状态管理模式",
+      "category": "architecture",
+      "file": "patterns/state-management-pattern.md",
+      "supported_libraries": ["riverpod", "bloc", "provider"],
+      "recommended": "riverpod",
+      "tags": ["state", "provider", "bloc", "mvvm", "clean"],
+      "complexity": "medium"
+    },
+    {
+      "id": "ui-pattern",
+      "name": "UI 模式",
+      "category": "ui",
+      "file": "patterns/ui-pattern.md",
+      "pdf_coverage": {
+        "tab_structure": true,
+        "device_list": true,
+        "rssi_chart": true,
+        "scrolling_logs": true
+      },
+      "tags": ["tab", "list", "chart", "fl_chart", "logs"],
+      "complexity": "medium"
+    },
+    {
+      "id": "factory-pattern",
+      "name": "工厂模式",
+      "category": "architecture",
+      "description": "通用代码生成工厂架构",
+      "file": "SKILL.md",
+      "tags": ["factory", "multi-granularity", "pattern-accumulation"],
+      "complexity": "high"
+    },
+    {
+      "id": "dynamic-validation-pattern",
+      "name": "动态验证模式",
+      "category": "validation",
+      "description": "根据需求动态生成验证文件",
+      "file": "validation/",
+      "tags": ["dynamic", "validation", "10min-verification"],
+      "complexity": "medium"
+    }
+  ],
+  "templates": {
+    "widget": {
+      "count": 6,
+      "directory": "templates/widget-templates.md",
+      "templates": ["Stateful", "Consumer", "ListItem", "Loading", "Error", "Empty"]
+    },
+    "service": {
+      "count": 4,
+      "directory": "templates/service-templates.md",
+      "templates": ["Bluetooth", "API", "Storage", "Log"]
+    },
+    "model": {
+      "count": 0,
+      "directory": "templates/model-templates.md",
+      "status": "planned"
+    },
+    "config": {
+      "count": 9,
+      "directory": "templates/config-templates.md",
+      "templates": ["pubspec.yaml (Riverpod)", "pubspec.yaml (BLoC)", "AndroidManifest.xml", "Info.plist", "build.gradle", "main.dart (Riverpod)", "main.dart (BLoC)"]
+    }
+  },
+  "validation": {
+    "mechanism": "dynamic",
+    "current_iteration": "flutter-factory-iteration-001",
+    "validation_files": [
+      "validation/flutter-factory-iteration-001-requirements.md",
+      "validation/flutter-factory-iteration-001-coverage.md",
+      "validation/flutter-factory-iteration-001-verification-plan.md",
+      "validation/flutter-factory-iteration-001-test-cases.md"
+    ],
+    "coverage_rate": "100%"
+  },
+  "stats": {
+    "total_generated": 1,
+    "by_type": {
+      "component": 0,
+      "project": 0,
+      "utility": 0,
+      "module": 0
+    },
+    "pdf_validation_passes": 13,
+    "pdf_coverage_rate": "100%",
+    "pattern_accumulations": 5
+  }
+}

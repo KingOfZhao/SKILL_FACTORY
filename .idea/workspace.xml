@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ae1e3d2-1fc8-4a3e-a1d8-7e0a78cc14fb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="1ae1e3d2-1fc8-4a3e-a1d8-7e0a78cc14fb" name="Changes" comment="README">
+      <change beforePath="$PROJECT_DIR$/.claude/skills/元/元-skill-生成器/待应用-skill/skill-catalog-scanner/SKILL.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +54,19 @@
       <option name="presentableId" value="Default" />
       <updated>1772171127046</updated>
     </task>
+    <task id="LOCAL-00001" summary="README">
+      <option name="closed" value="true" />
+      <created>1772185735948</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1772185735948</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="README" />
+    <option name="LAST_COMMIT_MESSAGE" value="README" />
   </component>
 </project>

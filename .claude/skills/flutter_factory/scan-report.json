@@ -1,0 +1,251 @@
+{
+  "scan_time": "2026-02-27T18:55:00Z",
+  "scan_path": ".claude/skills/flutter_factory/",
+  "scanner": "元-skill-扫描器",
+  "iteration_id": "flutter-factory-iteration-001",
+  "summary": {
+    "total_skills": 31,
+    "core_skill": 1,
+    "patterns": 3,
+    "template_sets": 3,
+    "total_templates": 19
+  },
+  "structure": {
+    "core": {
+      "path": ".claude/skills/flutter_factory/",
+      "skills": [
+        {
+          "name": "flutter-skill-factory",
+          "description": "元级 Flutter 代码生成工厂",
+          "type": "meta-skill"
+        }
+      ]
+    },
+    "patterns": {
+      "path": "patterns/",
+      "count": 3,
+      "items": [
+        {
+          "id": "bluetooth-pattern",
+          "name": "蓝牙通信模式",
+          "category": "communication",
+          "pdf_coverage": {
+            "bluetooth_scan": true,
+            "connection": true,
+            "rssi": true,
+            "exception_handling": true
+          },
+          "tags": ["ble", "flutter_blue_plus", "rssi", "stream"]
+        },
+        {
+          "id": "state-management-pattern",
+          "name": "状态管理模式",
+          "category": "architecture",
+          "supported_libraries": ["riverpod", "bloc", "provider"],
+          "recommended": "riverpod",
+          "tags": ["state", "provider", "bloc", "mvvm", "clean"]
+        },
+        {
+          "id": "ui-pattern",
+          "name": "UI 模式",
+          "category": "ui",
+          "pdf_coverage": {
+            "tab_structure": true,
+            "device_list": true,
+            "rssi_chart": true,
+            "scrolling_logs": true
+          },
+          "tags": ["tab", "list", "chart", "fl_chart", "logs"]
+        }
+      ]
+    },
+    "templates": {
+      "path": "templates/",
+      "sets": 3,
+      "total_templates": 19,
+      "items": [
+        {
+          "name": "widget-templates.md",
+          "count": 6,
+          "templates": ["Stateful", "Consumer", "ListItem", "Loading", "Error", "Empty"]
+        },
+        {
+          "name": "service-templates.md",
+          "count": 4,
+          "templates": ["Bluetooth", "API", "Storage", "Log"]
+        },
+        {
+          "name": "config-templates.md",
+          "count": 9,
+          "templates": ["pubspec.yaml (Riverpod)", "pubspec.yaml (BLoC)", "AndroidManifest.xml", "Info.plist", "build.gradle", "main.dart (Riverpod)", "main.dart (BLoC)"]
+        }
+      ]
+    },
+    "layers": [
+      {
+        "id": "1-requirements-layer",
+        "name": "需求层",
+        "count": 5,
+        "skills": [
+          "flutter-nlp-requirements-extractor",
+          "flutter-image-to-spec-converter",
+          "flutter-ml-requirement-prioritizer",
+          "flutter-voice-requirement-capture",
+          "flutter-conflict-detector"
+        ]
+      },
+      {
+        "id": "2-architecture-layer",
+        "name": "架构层",
+        "count": 5,
+        "skills": [
+          "flutter-mvvm-scaffolder",
+          "flutter-clean-arch-generator",
+          "flutter-di-container-builder",
+          "flutter-state-machine-crafter",
+          "flutter-event-bus-factory"
+        ]
+      },
+      {
+        "id": "3-ui-layer",
+        "name": "UI 层",
+        "count": 5,
+        "skills": [
+          "flutter-design-token-generator",
+          "flutter-lottie-animation-integrator",
+          "flutter-three-d-viewer-builder",
+          "flutter-responsive-layout-adapter",
+          "flutter-component-library-organizer"
+        ]
+      },
+      {
+        "id": "4-data-layer",
+        "name": "数据层",
+        "count": 5,
+        "skills": [
+          "flutter-graphql-client-builder",
+          "flutter-websocket-manager",
+          "flutter-background-sync-handler",
+          "flutter-sqlite-optimizer",
+          "flutter-crypto-data-encryptor"
+        ]
+      },
+      {
+        "id": "5-testing-layer",
+        "name": "测试层",
+        "count": 5,
+        "skills": [
+          "flutter-unit-test-generator",
+          "flutter-widget-test-generator",
+          "flutter-integration-test-automator",
+          "flutter-performance-test-runner",
+          "flutter-test-coverage-analyzer"
+        ]
+      },
+      {
+        "id": "6-deployment-layer",
+        "name": "部署层",
+        "count": 6,
+        "skills": [
+          "flutter-apk-builder",
+          "flutter-codesign-helper",
+          "flutter-docker-builder",
+          "flutter-firebase-app-distributor",
+          "flutter-k8s-deployer",
+          "flutter-gitlab-ci-generator"
+        ]
+      }
+    ]
+  },
+  "pdf_coverage": {
+    "total_requirements": 13,
+    "covered": 13,
+    "coverage_percentage": 100,
+    "coverage_details": {
+      "bluetooth_scan": {
+        "covered": true,
+        "skills": ["bluetooth-pattern", "flutter-graphql-client-builder"]
+      },
+      "no_manual_pairing": {
+        "covered": true,
+        "skills": ["bluetooth-pattern"]
+      },
+      "rssi_realtime_chart": {
+        "covered": true,
+        "skills": ["ui-pattern", "fl_chart template"]
+      },
+      "tab_structure": {
+        "covered": true,
+        "skills": ["ui-pattern"]
+      },
+      "device_list": {
+        "covered": true,
+        "skills": ["ui-pattern", "widget-templates"]
+      },
+      "scrolling_logs": {
+        "covered": true,
+        "skills": ["ui-pattern", "service-templates"]
+      },
+      "flutter_blue_plus": {
+        "covered": true,
+        "skills": ["bluetooth-pattern", "config-templates"]
+      },
+      "riverpod_bloc": {
+        "covered": true,
+        "skills": ["state-management-pattern"]
+      },
+      "mvvm_clean_arch": {
+        "covered": true,
+        "skills": ["flutter-mvvm-scaffolder", "flutter-clean-arch-generator"]
+      },
+      "real_device_connection": {
+        "covered": true,
+        "skills": ["bluetooth-pattern"]
+      },
+      "good_logging": {
+        "covered": true,
+        "skills": ["service-templates"]
+      },
+      "disconnect_retry": {
+        "covered": true,
+        "skills": ["bluetooth-pattern"]
+      },
+      "service_view_model": {
+        "covered": true,
+        "skills": ["architecture-layer skills"]
+      }
+    }
+  },
+  "state_management_support": {
+    "riverpod": {
+      "supported": true,
+      "has_templates": true
+    },
+    "bloc": {
+      "supported": true,
+      "has_templates": true
+    },
+    "provider": {
+      "supported": true,
+      "has_templates": true
+    }
+  },
+  "output_types": {
+    "component": {
+      "supported": true,
+      "description": "独立 Widget 或页面组件"
+    },
+    "project": {
+      "supported": true,
+      "description": "完整可运行的 Flutter 项目"
+    },
+    "utility": {
+      "supported": true,
+      "description": "单一工具类"
+    },
+    "module": {
+      "supported": true,
+      "description": "单一模块目录结构"
+    }
+  }
+}

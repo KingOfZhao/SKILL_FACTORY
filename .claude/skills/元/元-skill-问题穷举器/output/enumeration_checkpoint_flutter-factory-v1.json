@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "mode": "skilltree",
+  "iteration_id": "flutter-factory-iteration-001",
+  "problem": "生成 flutter-skill-factory - 元级 Flutter 代码生成工厂，支持4种输出粒度，通用化设计，以PDF为需求验证基准",
+  "current_node": "root",
+  "enumerated_so_far": [
+    "核心生成层 (4 skills)",
+    "模式库层 (5 skills)",
+    "模板层 (4 skills)",
+    "配置层 (4 skills)",
+    "验证层 (4 skills)"
+  ],
+  "next_pending_branches": [
+    "component-generator 详细设计",
+    "bluetooth-pattern 详细设计",
+    "pdf-requirement-validator 详细设计"
+  ],
+  "timestamp": "2026-02-27T18:50:00Z",
+  "created_at": "2026-02-27T18:50:00Z",
+  "pdf_reference": "/Users/administruter/Desktop/skill_factory/.claude/skills/flutter_factory/APP开发笔试题目.pdf",
+  "pdf_status": "not_found - using user description instead",
+  "total_skills_enumerated": 21
+}

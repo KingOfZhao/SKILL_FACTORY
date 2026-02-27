@@ -1,0 +1,590 @@
+{
+  "scan_info": {
+    "timestamp": "2026-02-27T19:00:00Z",
+    "scan_path": ".claude/skills/flutter_factory/",
+    "checker": "元-skill-检查器",
+    "iteration_id": "flutter-factory-iteration-001",
+    "total_items": 32
+  },
+  "rule_source": ".claude/skills/元/元-skill-生成器/common/underlying-convention.md",
+  "classification": {
+    "meta_skills": {
+      "count": 1,
+      "checked": true,
+      "validation_mode": "basic_only",
+      "items": ["flutter-skill-factory"]
+    },
+    "non_meta_skills": {
+      "count": 30,
+      "checked": true,
+      "validation_mode": "full_10min_validation",
+      "items": [
+        "flutter-nlp-requirements-extractor",
+        "flutter-image-to-spec-converter",
+        "flutter-ml-requirement-prioritizer",
+        "flutter-voice-requirement-capture",
+        "flutter-conflict-detector",
+        "flutter-mvvm-scaffolder",
+        "flutter-clean-arch-generator",
+        "flutter-di-container-builder",
+        "flutter-state-machine-crafter",
+        "flutter-event-bus-factory",
+        "flutter-design-token-generator",
+        "flutter-lottie-animation-integrator",
+        "flutter-three-d-viewer-builder",
+        "flutter-responsive-layout-adapter",
+        "flutter-component-library-organizer",
+        "flutter-graphql-client-builder",
+        "flutter-websocket-manager",
+        "flutter-background-sync-handler",
+        "flutter-sqlite-optimizer",
+        "flutter-crypto-data-encryptor",
+        "flutter-unit-test-generator",
+        "flutter-widget-test-generator",
+        "flutter-integration-test-automator",
+        "flutter-performance-test-runner",
+        "flutter-test-coverage-analyzer",
+        "flutter-apk-builder",
+        "flutter-codesign-helper",
+        "flutter-docker-builder",
+        "flutter-firebase-app-distributor",
+        "flutter-k8s-deployer",
+        "flutter-gitlab-ci-generator"
+      ]
+    },
+    "non_skill_content": {
+      "count": 1,
+      "checked": false,
+      "warning_only": true,
+      "items": ["pattern_registry.json", "scan-report.md", "scan-report.json"]
+    }
+  },
+  "summary": {
+    "total_checked": 31,
+    "passed": 28,
+    "warnings": 3,
+    "failed": 0
+  },
+  "skills": [
+    {
+      "item_name": "flutter-skill-factory",
+      "path": ".claude/skills/flutter_factory/SKILL.md",
+      "skill_type": "meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "naming",
+        "structure",
+        "mcp_declaration",
+        "file_integrity"
+      ],
+      "violations": [],
+      "exemptions": ["10min_validation"],
+      "validation_notes": "元级工厂 Skill，豁免 10 分钟验证原则。已检查命名、结构和 MCP 声明。"
+    },
+    {
+      "item_name": "flutter-nlp-requirements-extractor",
+      "path": ".claude/skills/flutter_factory/1-requirements-layer/flutter-nlp-requirements-extractor/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-image-to-spec-converter",
+      "path": ".claude/skills/flutter_factory/1-requirements-layer/flutter-image-to-spec-converter/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-ml-requirement-prioritizer",
+      "path": ".claude/skills/flutter_factory/1-requirements-layer/flutter-ml-requirement-prioritizer/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-voice-requirement-capture",
+      "path": ".claude/skills/flutter_factory/1-requirements-layer/flutter-voice-requirement-capture/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-conflict-detector",
+      "path": ".claude/skills/flutter_factory/1-requirements-layer/flutter-conflict-detector/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-mvvm-scaffolder",
+      "path": ".claude/skills/flutter_factory/2-architecture-layer/flutter-mvvm-scaffolder/",
+      "skill_type": "non_meta",
+      "status": "warning",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [
+        "SKILL.md 文件中缺少 10 分钟验证指南的具体步骤"
+      ],
+      "exemptions": [],
+      "suggestions": [
+        "添加 10 分钟验证指南的 5 步骤详细说明",
+        "添加成功标志的定义"
+      ]
+    },
+    {
+      "item_name": "flutter-clean-arch-generator",
+      "path": ".claude/skills/flutter_factory/2-architecture-layer/flutter-clean-arch-generator/",
+      "skill_type": "non_meta",
+      "status": "warning",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [
+        "缺少具体的验证脚本（verify.sh）"
+      ],
+      "exemptions": [],
+      "suggestions": [
+        "添加自动化验证脚本",
+        "文档化失败场景"
+      ]
+    },
+    {
+      "item_name": "flutter-di-container-builder",
+      "path": ".claude/skills/flutter_factory/2-architecture-layer/flutter-di-container-builder/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-state-machine-crafter",
+      "path": ".claude/skills/flutter_factory/2-architecture-layer/flutter-state-machine-crafter/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-event-bus-factory",
+      "path": ".claude/skills/flutter_factory/2-architecture-layer/flutter-event-bus-factory/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-design-token-generator",
+      "path": ".claude/skills/flutter_factory/3-ui-layer/flutter-design-token-generator/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-lottie-animation-integrator",
+      "path": ".claude/skills/flutter_factory/3-ui-layer/flutter-lottie-animation-integrator/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-three-d-viewer-builder",
+      "path": ".claude/skills/flutter_factory/3-ui-layer/flutter-three-d-viewer-builder/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-responsive-layout-adapter",
+      "path": ".claude/skills/flutter_factory/3-ui-layer/flutter-responsive-layout-adapter/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-component-library-organizer",
+      "path": ".claude/skills/flutter_factory/3-ui-layer/flutter-component-library-organizer/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-graphql-client-builder",
+      "path": ".claude/skills/flutter_factory/4-data-layer/flutter-graphql-client-builder/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-websocket-manager",
+      "path": ".claude/skills/flutter_factory/4-data-layer/flutter-websocket-manager/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-background-sync-handler",
+      "path": ".claude/skills/flutter_factory/4-data-layer/flutter-background-sync-handler/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-sqlite-optimizer",
+      "path": ".claude/skills/flutter_factory/4-data-layer/flutter-sqlite-optimizer/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-crypto-data-encryptor",
+      "path": ".claude/skills/flutter_factory/4-data-layer/flutter-crypto-data-encryptor/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-unit-test-generator",
+      "path": ".claude/skills/flutter_factory/5-testing-layer/flutter-unit-test-generator/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-widget-test-generator",
+      "path": ".claude/skills/flutter_factory/5-testing-layer/flutter-widget-test-generator/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-integration-test-automator",
+      "path": ".claude/skills/flutter_factory/5-testing-layer/flutter-integration-test-automator/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-performance-test-runner",
+      "path": ".claude/skills/flutter_factory/5-testing-layer/flutter-performance-test-runner/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-test-coverage-analyzer",
+      "path": ".claude/skills/flutter_factory/5-testing-layer/flutter-test-coverage-analyzer/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-apk-builder",
+      "path": ".claude/skills/flutter_factory/6-deployment-layer/flutter-apk-builder/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-codesign-helper",
+      "path": ".claude/skills/flutter_factory/6-deployment-layer/flutter-codesign-helper/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-docker-builder",
+      "path": ".claude/skills/flutter_factory/6-deployment-layer/flutter-docker-builder/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-firebase-app-distributor",
+      "path": ".claude/skills/flutter_factory/6-deployment-layer/flutter-firebase-app-distributor/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-k8s-deployer",
+      "path": ".claude/skills/flutter_factory/6-deployment-layer/flutter-k8s-deployer/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "flutter-gitlab-ci-generator",
+      "path": ".claude/skills/flutter_factory/6-deployment-layer/flutter-gitlab-ci-generator/",
+      "skill_type": "non_meta",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "validation_mechanism",
+        "failure_handling",
+        "output_verifiability"
+      ],
+      "violations": [],
+      "exemptions": []
+    }
+  ],
+  "non_skill_warnings": [
+    {
+      "item_name": "pattern_registry.json",
+      "warning": "Non-skill content (JSON registry file), skipped"
+    },
+    {
+      "item_name": "scan-report.md",
+      "warning": "Non-skill content (Markdown report), skipped"
+    },
+    {
+      "item_name": "scan-report.json",
+      "warning": "Non-skill content (JSON report), skipped"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "medium",
+      "target": "flutter-mvvm-scaffolder",
+      "action": "Add detailed 10-minute verification guide with 5 steps",
+      "reason": "Missing explicit verification steps"
+    },
+    {
+      "priority": "medium",
+      "target": "flutter-clean-arch-generator",
+      "action": "Add verify.sh script for automated verification",
+      "reason": "Missing automation script for validation"
+    }
+  ]
+}
