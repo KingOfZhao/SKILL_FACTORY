@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "mode": "skilltree",
+  "iteration_id": "bluetooth-protocol-optimization-002",
+  "problem": "优化元 Skill 体系以支持蓝牙协议细粒度区分（Classic vs BLE）",
+  "current_node": "root",
+  "enumerated_so_far": [
+    "核心生成层 (4 skills)",
+    "配置层 (4 skills)",
+    "模板层 (3 skills)",
+    "验证层 (4 skills)",
+    "优化层 (3 skills)"
+  ],
+  "next_pending_branches": [
+    "protocol-selector-generator 详细设计",
+    "ble-scanner-generator 详细设计",
+    "classic-connector-generator 详细设计",
+    "hybrid-protocol-generator 详细设计"
+  ],
+  "timestamp": "2026-02-27T20:30:00Z",
+  "created_at": "2026-02-27T20:30:00Z",
+  "pdf_reference": "/Users/administruter/Desktop/skill_factory/.claude/skills/flutter_factory/APP开发笔试题目.pdf",
+  "pdf_status": "not_found - using user description instead",
+  "total_skills_enumerated": 18
+}

@@ -1,0 +1,522 @@
+# 最佳实践来源配置
+
+定义各个领域的最佳实践来源和搜索策略。
+
+## 来源类型定义
+
+### 1. 官方文档 (official-docs)
+最权威的来源，来自框架或平台的官方文档。
+
+### 2. 代码仓库 (repos)
+GitHub、GitLab、Bitbucket 等平台上的仓库。
+
+### 3. 包仓库 (packages)
+pub.dev、npm、Maven Central、CocoaPods 等包管理平台。
+
+### 4. 问答社区 (qa-communities)
+Stack Overflow、Quora 等问答平台。
+
+### 5. 论坛/社区 (forums)
+Reddit、Discord、Slack、LinkedIn 群组等。
+
+### 6. 博客平台 (blogs)
+Medium、Dev.to、Hacker News 等博客平台。
+
+### 7. 视频平台 (videos)
+YouTube、Bilibili、Vimeo 等视频平台。
+
+### 8. 会议/事件 (conferences)
+DevFest、Google I/O、Fluttercon 等技术会议。
+
+## 领域来源配置
+
+### Flutter 领域
+
+```yaml
+flutter:
+  official_docs:
+    - url: https://docs.flutter.dev
+      name: Flutter 官方文档
+      sections:
+        - overview/architecture
+        - cookbook
+        - codelabs
+        - testing
+        - performance
+
+  repos:
+    - repo: flutter/flutter
+      name: Flutter 官方仓库
+      type: official
+      priority: 1
+    - repo: flutterblue/flutter_blue_plus
+      name: flutter_blue_plus
+      type: popular
+      priority: 2
+    - repo: fl_chart/fl_chart
+      name: fl_chart
+      type: popular
+      priority: 2
+    - repo: rrousselGit/record_sqflite
+      name: sqflite
+      type: popular
+      priority: 3
+
+  packages:
+    - name: provider
+      url: https://pub.dev/packages/provider
+      likes_threshold: 5000
+      type: state_management
+    - name: riverpod
+      url: https://pub.dev/packages/riverpod
+      likes_threshold: 3000
+      type: state_management
+    - name: flutter_blue_plus
+      url: https://pub.dev/packages/flutter_blue_plus
+      likes_threshold: 1000
+      type: bluetooth
+    - name: fl_chart
+      url: https://pub.dev/packages/fl_chart
+      likes_threshold: 2000
+      type: charts
+    - name: sqflite
+      url: https://pub.dev/packages/sqflite
+      likes_threshold: 3000
+      type: database
+
+  qa:
+    - platform: stackoverflow
+      tags:
+        - flutter
+        - dart
+        - riverpod
+        - bloc
+      min_score: 10
+
+  forums:
+    - platform: reddit
+      communities:
+        - name: r/FlutterDev
+          type: primary
+        - name: r/flutter
+          type: primary
+        - name: r/androiddev
+          type: related
+      min_upvotes: 5
+
+  blogs:
+    - platform: medium
+      publications:
+        - name: Flutter
+          type: official
+        - name: Flutter Medium Blog
+          type: curated
+        - name: Better Programming
+          type: curated
+
+  videos:
+    - platform: youtube
+      channels:
+        - name: Flutter
+          type: official
+          url: https://www.youtube.com/@FlutterDev
+        - name: The Boring Flutter Development Show
+          type: educational
+          url: https://www.youtube.com/@resocoder
+        - name: Rivaan Ranjan
+          type: educational
+          url: https://www.youtube.com/@RivaanRanjan
+
+  conferences:
+    - name: Fluttercon
+      url: https://fluttercon.dev
+      type: global
+    - name: DevFest
+      url: https://devfest.dev
+      type: regional
+    - name: Google I/O
+      url: https://developers.google.com/events
+      type: keynote
+```
+
+### Android 领域
+
+```yaml
+android:
+  official_docs:
+    - url: https://developer.android.com
+      name: Android Developers
+      sections:
+        - guide/topics
+        - samples
+        - codelabs
+        - best-practices
+
+  repos:
+    - repo: android/architecture-samples
+      name: Architecture Samples
+      type: official
+    - repo: android/architecture-components-samples
+      name: Architecture Components
+      type: official
+    - repo: google/iosched
+      name: I/O Schedule
+      type: reference
+
+  packages:
+    - name: Jetpack Compose
+      url: https://developer.android.com/jetpack/compose
+      type: ui
+    - name: Room
+      url: https://developer.android.com/topic/libraries/architecture/data-layer/room
+      type: database
+    - name: WorkManager
+      url: https://developer.android.com/topic/background-work
+      type: background
+
+  qa:
+    - platform: stackoverflow
+      tags:
+        - android
+        - kotlin
+        - jetpack
+        - compose
+      min_score: 15
+
+  forums:
+    - platform: reddit
+      communities:
+        - name: r/androiddev
+          type: primary
+        - name: r/AndroidQuestions
+          type: primary
+```
+
+### iOS 领域
+
+```yaml
+ios:
+  official_docs:
+    - url: https://developer.apple.com
+      name: Apple Developer
+      sections:
+        - documentation
+        - sample-code
+        - videos
+        - forums
+
+  repos:
+    - repo: swift/swift
+      name: Swift 官方仓库
+      type: official
+    - repo: apple/swift-package-manager
+      name: Swift Package Manager
+      type: official
+
+  packages:
+    - name: Alamofire
+      url: https://github.com/Alamofire/Alamofire
+      type: network
+    - name: Kingfisher
+      url: https://github.com/onevcat/Kingfisher
+      type: image
+
+  qa:
+    - platform: stackoverflow
+      tags:
+        - ios
+        - swift
+        - swiftui
+      min_score: 15
+```
+
+### React Native 领域
+
+```yaml
+react_native:
+  official_docs:
+    - url: https://reactnative.dev
+      name: React Native 官方文档
+      sections:
+        - getting-started
+        - architecture
+        - native-modules
+
+  repos:
+    - repo: facebook/react-native
+      name: React Native 官方仓库
+      type: official
+    - repo: callstack/react-native
+      name: React Navigation
+      type: popular
+    - repo: callstack/redux
+      name: Redux
+      type: popular
+
+  packages:
+    - name: react-navigation
+      url: https://reactnavigation.org
+      type: navigation
+    - name: react-native-paper
+      url: https://reactnativepaper.com
+      type: ui
+    - name: zustand
+      url: https://zustand-demo.pmjs.org
+      type: state_management
+
+  qa:
+    - platform: stackoverflow
+      tags:
+        - react-native
+        - reactjs
+      min_score: 10
+```
+
+### Web 领域
+
+```yaml
+web:
+  official_docs:
+    - url: https://developer.mozilla.org
+      name: MDN Web Docs
+      type: authoritative
+    - url: https://web.dev
+      name: Web.dev
+      type: authoritative
+
+  repos:
+    - repo: facebook/react
+      name: React
+      type: official
+    - repo: vuejs/core
+      name: Vue.js
+      type: official
+
+  packages:
+    - name: react-query
+      url: https://tanstack.com/query
+      type: data-fetching
+    - name: zustand
+      url: https://zustand-demo.pmjs.org
+      type: state_management
+    - name: tailwindcss
+      url: https://tailwindcss.com
+      type: styling
+
+  ui_libraries:
+    - name: Material-UI
+      url: https://mui.com
+      type: material-design
+    - name: Ant Design
+      url: https://ant.design
+      type: component-library
+    - name: Chakra UI
+      url: https://chakra-ui.com
+      type: component-library
+```
+
+### AI/ML 领域
+
+```yaml
+ai_ml:
+  official_docs:
+    - url: https://pytorch.org/docs
+      name: PyTorch Docs
+    - url: https://www.tensorflow.org/guide
+      name: TensorFlow Guide
+
+  repos:
+    - repo: pytorch/pytorch
+      name: PyTorch
+      type: official
+    - repo: tensorflow/tensorflow
+      name: TensorFlow
+      type: official
+    - repo: huggingface/transformers
+      name: Transformers
+      type: popular
+
+  packages:
+    - name: scikit-learn
+      url: https://scikit-learn.org
+      type: ml
+    - name: pandas
+      url: https://pandas.pydata.org
+      type: data-processing
+    - name: numpy
+      url: https://numpy.org
+      type: numerical-computing
+```
+
+## 搜索策略配置
+
+### 默认搜索设置
+
+```yaml
+search_strategy:
+  # 每个来源的最大结果数
+  max_results_per_source: 10
+
+  # 总结果数上限
+  total_results_limit: 50
+
+  # 可信度阈值 (只保留超过此分数的结果)
+  min_credibility_score: 50
+
+  # 去重策略
+  deduplication:
+    method: url_and_title  # url_only, title_only, url_and_title
+    similarity_threshold: 0.85
+
+  # 超时设置 (秒)
+  timeout_per_source: 10
+
+  # 并发查询数
+  concurrent_queries: 3
+```
+
+### 排序策略
+
+```yaml
+ranking:
+  primary_factor: relevance  # relevance, popularity, recency
+
+  secondary_factors:
+    - source_credibility: weight: 0.3
+    - answer_votes: weight: 0.2
+    - publication_date: weight: 0.15
+    - code_example_available: weight: 0.15
+    - community_validation: weight: 0.2
+```
+
+## 可信度评分规则
+
+### 来源基础分
+
+| 来源类型 | 基础分 |
+|---------|---------|
+| 官方文档 | 100 |
+| 官方仓库 | 90 |
+| 流行包 (高 like 数) | 85 |
+| 社区验证 (高投票) | 75 |
+| 技术博客 | 65 |
+| 视频教程 | 60 |
+| 会议资源 | 80 |
+
+### 额外加分
+
+| 条件 | 加分 |
+|------|------|
+| 包含代码示例 | +10 |
+| 有实际项目演示 | +10 |
+| 被多次引用 | +5 |
+| 最近更新 (<6 个月) | +5 |
+| 有官方认证标记 | +15 |
+
+### 扣分条件
+
+| 条件 | 扣分 |
+|------|------|
+| 链接失效 | -30 |
+| 过于陈旧 (>3 年) | -20 |
+| 未经验证 | -10 |
+
+## 关键词映射
+
+### Flutter 相关关键词
+
+```yaml
+flutter_keywords:
+  architecture:
+    - clean architecture
+    - mvvm
+    - bloc
+    - riverpod
+    - provider
+    - state management
+    - dependency injection
+
+  ui:
+    - material design
+    - responsive layout
+    - animation
+    - custom widget
+    - adaptive ui
+
+  data:
+    - api client
+    - database
+    - local storage
+    - data serialization
+    - caching
+
+  bluetooth:
+    - bluetooth low energy
+    - classic bluetooth
+    - ble
+    - flutter_blue_plus
+    - rssi monitoring
+    - connection management
+    - reconnection strategy
+
+  performance:
+    - lazy loading
+    - pagination
+    - image optimization
+    - build optimization
+    - code splitting
+```
+
+### 通用技术关键词
+
+```yaml
+common_keywords:
+  best_practices:
+    - best practices
+    - conventions
+    - guidelines
+    - patterns
+    - anti-patterns
+    - code style
+
+  error_handling:
+    - try-catch
+    - error boundary
+    - graceful degradation
+    - fallback
+    - retry logic
+
+  testing:
+    - unit testing
+    - integration testing
+    - e2e testing
+    - widget testing
+    - golden testing
+    - mocking
+
+  security:
+    - input validation
+    - data encryption
+    - secure storage
+    - authentication
+    - authorization
+```
+
+## 收集触发条件
+
+### 自动收集阈值
+
+```yaml
+auto_collection:
+  # 知识库条目数低于此值时触发收集
+  min_practices_threshold: 5
+
+  # 知识库上次更新超过此天数时触发收集
+  stale_days_threshold: 30
+
+  # 用户手动请求时总是收集
+  manual_request_always_collect: true
+
+  # 领域识别置信度高于此值时收集
+  domain_confidence_threshold: 0.7
+```

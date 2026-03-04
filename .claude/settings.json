@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python orchestrator.py \"增强一个名为 ''元-micro-diff-factory'' 的微分 Skill 组（元级工厂），其核心哲学为：以结构化认知世界为前提，采用自上而下微分拆解 + 自下而上物理实践积累的双向路径，实现 AI 从边界问题到可验证物理实践的认知闭环。\" --full-chain --pdf-reference \"/Users/administruter/Desktop/skill_factory/.claude/skills/flutter_factory/APP开发笔试题目.pdf\" --output-dir \"/Users/administruter/Desktop/skill_factory/.claude/skills/micro-diff-factory\" --verbose --iteration-id \"micro-diff-factory-philosophical-core-001\")",
+      "Bash(python3 orchestrator.py \"增强一个名为 ''元-micro-diff-factory'' 的微分 Skill 组（元级工厂），其核心哲学为：以结构化认知世界为前提，采用自上而下微分拆解 + 自下而上物理实践积累的双向路径，实现 AI 从边界问题到可验证物理实践的认知闭环。\" --full-chain --pdf-reference \"/Users/administruter/Desktop/skill_factory/.claude/skills/flutter_factory/APP开发笔试题目.pdf\" --output-dir \"/Users/administruter/Desktop/skill_factory/.claude/skills/micro-diff-factory\" --verbose --iteration-id \"micro-diff-factory-philosophical-core-001\")",
+      "Bash(python3 orchestrator.py \"优化整个 /Users/administruter/Desktop/skill_factory/.claude/skills/元/ 下的所有 Skill，包括问题穷举器、生成器、扫描器、检查器、优化器、修复器、反馈收集器、依赖分析器、性能分析器、使用追踪器、兼容性检查器等\" --full-chain --pdf-reference \"/Users/administruter/Desktop/skill_factory/.claude/skills/flutter_factory/APP开发笔试题目.pdf\" --output-dir \"/Users/administruter/Desktop/skill_factory/.claude/skills/元\" --verbose --iteration-id \"meta-skills-optimization-001\")",
+      "Bash(python3 orchestrator_enhanced.py \"优化整个 /Users/administruter/Desktop/skill_factory/.claude/skills/元/ 下的所有 Skill，包括问题穷举器、生成器、扫描器、检查器、优化器、修复器、反馈收集器、依赖分析器、性能分析器、使用追踪器、兼容性检查器等\" --full-chain --pdf-reference \"/Users/administruter/Desktop/skill_factory/.claude/skills/flutter_factory/APP开发笔试题目.pdf\" --output-dir \"/Users/administruter/Desktop/skill_factory/.claude/skills/元\" --verbose --iteration-id \"meta-skills-orchestrator-enhanced-001\")",
+      "Bash(python3 orchestrator_enhanced.py \"优化flutter_factory中的技能，优化蓝牙扫描器项目中的性能问题，整合到统一的技能体系中\" --full-chain --output-dir \"/Users/administruter/Desktop/skill_factory/.claude/skills/元\" --verbose --iteration-id \"flutter-bluetooth-integration-001\")",
+      "Read(//Users/administruter/Desktop/bluetooth_scanner/lib/**)",
+      "Bash(python3 -:*)",
+      "Bash(python3 problem_classifier.py)",
+      "Bash(python3 problem_classifier_enhanced.py)",
+      "Bash(python3 skill_recommender.py)",
+      "Bash(python3 -m py_compile skill_recommender.py)",
+      "Read(//Users/administruter/Desktop/bluetooth_scanner/**)"
+    ],
+    "additionalDirectories": [
+      "/Users/administruter/Desktop/skill_factory/.claude/skills/micro-diff-factory",
+      "/Users/administruter/Desktop/skill_factory/.claude/skills/元",
+      "/Users/administruter/Desktop/skill_factory/.claude/skills/元/common",
+      "/Users/administruter/Desktop/bluetooth_scanner/lib/domain/entities"
+    ]
+  }
+}

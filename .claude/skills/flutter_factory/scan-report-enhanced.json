@@ -1,0 +1,126 @@
+{
+  "scan_time": "2026-02-27T20:50:00Z",
+  "scan_path": ".claude/skills/flutter_factory/",
+  "scanner": "元-skill-扫描器（增强版）",
+  "iteration_id": "bluetooth-protocol-optimization-002",
+  "summary": {
+    "total_skills": 1,
+    "core_skill": 1,
+    "pattern_documents": 3,
+    "template_sets": 3,
+    "optimization_sections": 7
+  },
+  "core_skill": {
+    "name": "flutter-skill-factory",
+    "version": "1.2",
+    "new_capabilities": [
+      "蓝牙协议支持 (BLE + Classic)",
+      "参数化协议选择",
+      "权限处理优化 (Android/iOS 差异)",
+      "异步线程处理",
+      "性能优化策略",
+      "第三方组件 Issue 处理"
+    ]
+  },
+  "pattern_documents": {
+    "bluetooth-pattern": {
+      "file": "patterns/bluetooth-pattern.md",
+      "capabilities": [
+        "BLE 扫描",
+        "BLE 连接",
+        "RSSI 监控",
+        "异常处理"
+      ]
+    },
+    "state-management-pattern": {
+      "file": "patterns/state-management-pattern.md",
+      "capabilities": [
+        "Riverpod Provider",
+        "Bloc 模板",
+        "Provider 模板"
+      ]
+    },
+    "ui-pattern": {
+      "file": "patterns/ui-pattern.md",
+      "capabilities": [
+        "Tab 结构",
+        "设备列表",
+        "RSSI 图表",
+        "滚动日志"
+      ]
+    }
+  },
+  "template_sets": {
+    "widget-templates": {
+      "file": "templates/widget-templates.md",
+      "count": 6,
+      "templates": ["Stateful", "Consumer", "ListItem", "Loading", "Error", "Empty"]
+    },
+    "service-templates": {
+      "file": "templates/service-templates.md",
+      "count": 4,
+      "templates": ["Bluetooth", "API", "Storage", "Log"]
+    },
+    "config-templates": {
+      "file": "templates/config-templates.md",
+      "count": 9,
+      "templates": ["pubspec.yaml (Riverpod)", "pubspec.yaml (BLoC)", "AndroidManifest.xml", "Info.plist", "build.gradle"]
+    }
+  },
+  "optimizations": {
+    "protocol_support": {
+      "enabled": true,
+      "description": "支持 BLE 和 Classic 双协议",
+      "implementation": "SKILL.md - 蓝牙协议支持与优化策略章节"
+    },
+    "parameterized_protocol": {
+      "enabled": true,
+      "parameters": ["protocol", "force-protocol"],
+      "implementation": "SKILL.md - 输入规范章节"
+    },
+    "permission_handling": {
+      "enabled": true,
+      "android_ble_permissions": [
+        "BLUETOOTH_SCAN",
+        "BLUETOOTH_CONNECT",
+        "ACCESS_FINE_LOCATION"
+      ],
+      "android_classic_permissions": [
+        "BLUETOOTH",
+        "BLUETOOTH_ADMIN"
+      ],
+      "ios_ble_permissions": [
+        "NSBluetoothAlwaysUsageDescription",
+        "NSLocationWhenInUseUsageDescription"
+      ],
+      "ios_classic_permissions": [
+        "NSBluetoothPeripheralUsageDescription"
+      ],
+      "implementation": "SKILL.md - 权限处理章节"
+    },
+    "async_threading": {
+      "enabled": true,
+      "description": "使用异步线程处理蓝牙操作",
+      "implementation": "SKILL.md - 性能优化策略章节"
+    },
+    "performance_optimization": {
+      "enabled": true,
+      "battery_optimization": true,
+      "memory_optimization": true,
+      "ui_responsiveness": true,
+      "implementation": "SKILL.md - 性能优化策略章节"
+    },
+    "issue_handling": {
+      "enabled": true,
+      "libraries": [
+        "flutter_blue_plus",
+        "fl_chart"
+      ],
+      "issues": [
+        "连接卡顿",
+        "数据量大时图表卡顿"
+      ],
+      "implementation": "SKILL.md - 第三方组件 Issue 处理章节"
+    }
+  }
+}

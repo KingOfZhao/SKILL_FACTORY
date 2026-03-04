@@ -1,0 +1,118 @@
+{
+  "scan_info": {
+    "timestamp": "2026-02-27T21:00:00Z",
+    "scan_path": ".claude/skills/flutter_factory/",
+    "checker": "元-skill-检查器（手动执行）",
+    "iteration_id": "bluetooth-protocol-optimization-002"
+  },
+  "classification": {
+    "meta_skills": {
+      "count": 0,
+      "checked": false,
+      "validation_mode": "basic_only"
+    },
+    "non_meta_skills": {
+      "count": 0,
+      "checked": false,
+      "validation_mode": "full_10min_validation"
+    },
+    "generated_code": {
+      "count": 1,
+      "checked": true,
+      "validation_mode": "full_10min_validation"
+    },
+    "documentation": {
+      "count": 3,
+      "checked": true,
+      "validation_mode": "basic_only"
+    }
+  },
+  "rule_source": ".claude/skills/元/元-skill-生成器/common/underlying-convention.md",
+  "summary": {
+    "total_checked": 4,
+    "passed": 3,
+    "warnings": 1,
+    "failed": 0
+  },
+  "skills": [
+    {
+      "item_name": "flutter-skill-factory/SKILL.md",
+      "skill_type": "generated_code",
+      "status": "passed",
+      "checked_dimensions": [
+        "file_integrity",
+        "content_structure",
+        "input_specification",
+        "documentation_quality",
+        "feature_completeness"
+      ],
+      "violations": [],
+      "exemptions": ["10min_validation"],
+      "validation_notes": "✅ 蓝牙协议支持章节完整（BLE + Classic）"
+    },
+    {
+      "item_name": "输入规范 - 蓝牙协议参数",
+      "skill_type": "generated_code",
+      "status": "passed",
+      "checked_dimensions": [
+        "input_specification",
+        "documentation_quality"
+      ],
+      "violations": [],
+      "exemptions": [],
+      "validation_notes": "✅ 协议参数（protocol、force-protocol）已添加"
+    },
+    {
+      "item_name": "使用方法 - 协议示例",
+      "skill_type": "generated_code",
+      "status": "passed",
+      "checked_dimensions": [
+        "documentation_quality",
+        "usage_examples"
+      ],
+      "violations": [],
+      "exemptions": []
+    },
+    {
+      "item_name": "蓝牙协议支持与优化策略章节",
+      "skill_type": "generated_code",
+      "status": "passed",
+      "checked_dimensions": [
+        "content_structure",
+        "documentation_quality",
+        "feature_completeness"
+      ],
+      "violations": [],
+      "exemptions": [],
+      "validation_notes": "✅ 7 个优化策略章节完整"
+    }
+  ],
+  "warnings": [
+    {
+      "item_name": "经典蓝牙实际实现",
+      "warning": "协议支持已添加，但经典蓝牙具体实现代码尚未生成，需要下次迭代完成",
+      "severity": "info",
+      "suggestion": "建议在下次迭代中生成 ClassicBluetoothService 的具体实现代码"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "medium",
+      "target": "下次迭代",
+      "action": "实现 ClassicBluetoothService（使用 flutter_bluetooth_serial）",
+      "reason": "完善双协议支持"
+    },
+    {
+      "priority": "medium",
+      "target": "下次迭代",
+      "action": "创建 PermissionResolver 和 AsyncThreadHandler 的具体实现",
+      "reason": "完善权限处理和异步线程处理"
+    },
+    {
+      "priority": "low",
+      "target": "优化器",
+      "action": "底层约定优化",
+      "reason": "在 underlying-convention.md 中添加蓝牙协议相关的规则"
+    }
+  ]
+}

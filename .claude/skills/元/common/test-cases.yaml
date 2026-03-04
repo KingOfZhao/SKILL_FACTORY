@@ -1,0 +1,279 @@
+# 测试用例定义（Test Cases Definition）
+
+# 版本信息
+version: 1.0
+last_updated: 2026-02-28
+
+---
+
+## 测试套件（Test Suites）
+
+### full_chain_test
+**描述**: 完整链路测试 - 测试从微分拆解到优化器的完整流程
+**执行模式**: 自动化
+**超时时间**: 300 秒
+
+**测试用例**:
+- name: 蓝牙连接优化完整链路
+  description: |
+    测试完整链路流程：
+    1. 微分拆解器识别蓝牙问题
+    2. 问题穷举器基于微分分析生成技能树
+    3. 生成器生成技能
+    4. 扫描器识别技能
+    5. 检查器验证合规性
+    6. 优化器生成优化方案
+  input:
+    problem_description: "蓝牙连接不稳定，经常断开"
+    problem_type: "bluetooth"
+  steps:
+    - name: 微分拆解器调用
+      command: "/元-skill-微分器"
+      args: "蓝牙连接不稳定，经常断开"
+      expected_output: "bluetooth" 问题类型，变量定义
+      expected_duration: "< 180秒"
+      validation: 检查问题类型识别正确性
+
+    - name: 问题穷举器调用
+      command: "/元-skill-问题穷举器"
+      args: "--mode skilltree"
+      input_data: "蓝牙连接问题"
+      expected_output: "Skill 树建议"
+      expected_duration: "< 180秒"
+      validation: 检查技能树结构完整性
+
+    - name: 生成器调用
+      command: "/元-skill-生成器"
+      args: "--input-skilltree --use-reference-cases"
+      input_data: "Skill 树数据"
+      expected_output: "生成的 SKILL.md"
+      expected_duration: "< 300秒"
+      validation: 检查 SKILL.md 文件结构
+
+    - name: 扫描器调用
+      command: "/元-skill-扫描器"
+      args: "--target 待应用-skill/"
+      expected_output: "技能清单文件"
+      expected_duration: "< 120秒"
+      validation: 检查清单格式和内容完整性
+
+    - name: 检查器调用
+      command: "/元-skill-检查器"
+      args: "--target 待应用-skill/"
+      expected_output: "合规性报告"
+      expected_duration: "< 180秒"
+      validation: 检查通过的技能数量
+
+    - name: 优化器调用
+      command: "/元-skill-优化器"
+      args: "--target 待应用-skill/"
+      expected_output: "优化方案"
+      expected_duration: "< 120秒"
+      validation: 检查优化方案数量
+
+  expected_outputs:
+    - problem_type_report: "蓝牙问题类型识别"
+    - skill_tree: "蓝牙技能树建议"
+    - generated_skills: "生成的蓝牙技能文件"
+    - skill_inventory: "技能清单"
+    - compliance_report: "合规性检查报告"
+    - optimization_plan: "优化方案"
+
+- name: RSSI 图表优化完整链路
+  description: |
+    测试完整链路流程：
+    1. 微分拆解器识别 RSSI 图表问题
+    2. 问题穷举器生成优化策略
+    3. 生成器实现性能优化策略
+  input:
+    problem_description: "RSSI 图表卡顿，需要优化"
+    problem_type: "rssi_chart"
+  steps:
+    - name: 微分拆解器调用
+      command: "/元-skill-微分器"
+      args: "RSSI 图表更新太频繁导致界面卡顿"
+      expected_output: "rssi_chart" 问题类型，变量定义
+      expected_duration: "< 180秒"
+      validation: 检查问题类型识别正确性
+
+    - name: 问题穷举器调用
+      command: "/元-skill-问题穷举器"
+      args: "--mode skilltree"
+      input_data: "RSSI 图表性能优化"
+      expected_output: "性能优化策略建议"
+      expected_duration: "< 180秒"
+      validation: 检查策略完整性
+
+  expected_outputs:
+    - problem_type_report: "RSSI 图表问题类型识别"
+    - optimization_strategies: "性能优化策略"
+    - generated_improvements: "生成的性能优化技能"
+
+### integration_test
+**描述**: 集成测试 - 测试两个环节之间的集成
+
+**测试用例**:
+- name: 生成器 + 扫描器集成
+  description: |
+    测试生成器和扫描器的数据集成
+  steps:
+    - name: 调用生成器
+      command: "/元-skill-生成器"
+      args: "--input-skilltree"
+      input_data: "测试技能"
+      expected_output: "SKILL.md + description.md"
+      expected_duration: "< 300秒"
+      validation: 检查输出文件完整性
+
+    - name: 调用扫描器
+      command: "/元-skill-扫描器"
+      args: "--target 待应用-skill/"
+      expected_output: "技能清单"
+      expected_duration: "< 120秒"
+      validation: 检查清单包含新生成的技能
+
+  expected_outputs:
+    - generated_skill_files: "生成的技能文件列表"
+    - skill_inventory: "包含新生成的技能的清单"
+    - validation_result: "扫描器成功识别新技能"
+
+- name: 检查器 + 优化器集成
+  description: |
+    测试检查器和优化器的数据流转
+  steps:
+    - name: 调用检查器
+      command: "/元-skill-检查器"
+      args: "--target 待应用-skill/"
+      expected_output: "合规性报告 (diagnosis.json)"
+      expected_duration: "< 180秒"
+      validation: 检查报告包含详细的验证结果
+
+    - name: 调用优化器
+      command: "/元-skill-优化器"
+      args: "--target 待应用-skill/"
+      input_data: "diagnosis.json"
+      expected_output: "优化方案 (优化计划.md)"
+      expected_duration: "< 120秒"
+      validation: 检查优化方案包含具体实施步骤
+
+  expected_outputs:
+    - compliance_report: "合规性报告"
+    - optimization_plan: "优化计划"
+    - validation_result: "优化器基于检查结果生成方案"
+
+---
+
+## 测试执行模式（Test Execution Modes）
+
+### 自动化执行
+**命令**: `python3 /元/元-skill-orchestrator/orchestrator_enhanced.py --full-chain --run-tests`
+**描述**: 运行完整链路并自动执行所有测试用例
+**输出**: 测试报告 (test-report.md)
+**超时**: 600 秒
+
+### 手动执行
+**命令**: `python3 /元/元-skill-orchestrator/orchestrator_enhanced.py --single-step e2e-test --verbose`
+**描述**: 手动运行端到端测试
+**输出**: 测试报告 (test-report.md)
+
+---
+
+## 验证标准（Validation Standards）
+
+### 测试通过标准（Pass Criteria）
+1. **功能正确性**: 所有步骤成功执行
+2. **输出完整性**: 所有 expected_outputs 都生成
+3. **时效性**: 每个步骤在 expected_duration 内完成
+4. **数据一致性**: 数据正确流转，无数据丢失
+
+### 测试失败标准（Fail Criteria）
+1. **步骤失败**: 任何步骤执行失败或超时
+2. **输出缺失**: expected_outputs 缺失
+3. **数据错误**: 数据格式错误或内容错误
+4. **超时**: 步骤执行时间超过 expected_duration 的 1.5 倍
+
+---
+
+## 测试报告格式（Test Report Format）
+
+### 自动化测试报告
+**文件**: `output/e2e-test-report.md`
+
+```markdown
+# 端到端测试报告
+
+## 执行概览
+- 执行时间: [时间戳]
+- 测试套件: [套件名称]
+- 总测试数: [数量]
+- 通过: [数量]
+- 失败: [数量]
+- 通过率: [百分比]
+
+## 测试用例详情
+
+### [测试用例 1]
+- **状态**: 通过/失败
+- **执行时间**: [时间]
+- **步骤**: [步骤执行列表]
+- **预期输出**: [列出所有 expected_outputs]
+- **实际输出**: [列出实际生成/找到的文件]
+
+...
+
+[继续所有测试用例...]
+```
+
+### 手动测试报告
+**文件**: `output/manual-test-report.md`
+
+---
+
+## 工具支持（Tooling）
+
+### 测试执行器
+- 测试用例执行器
+- 结果验证器
+- 性能监控器
+
+### 结果验证器
+- expected_outputs 比对器
+- 文件完整性检查器
+
+---
+
+## 维护说明
+
+### 添加新测试用例
+1. 在相应的测试套件下添加新的测试用例
+2. 遵循 YAML 格式规范
+3. 包含完整的输入、步骤、预期输出、验证标准
+4. 更新 version 和 last_updated
+
+### 运行测试
+1. 自动化：使用 orchestrator_enhanced.py 的 --run-tests 模式
+2. 手动：使用 --single-step e2e-test 模式
+
+### 测试数据管理
+- 测试输出存放在 `output/test-outputs/` 目录
+- 每次测试前清空该目录
+- 保留最近 10 次测试结果
+
+---
+
+## 未来扩展（Future Extensions）
+
+### 性能测试套件
+- 添加性能基准测试
+- 内存使用监控
+- CPU 使用监控
+
+### 安全测试套件
+- SQL 注入测试
+- XSS 防护测试
+- 认证授权测试
+
+### 兼容性测试套件
+- 跨平台测试
+- 浏览器兼容性测试
+- API 版本兼容性测试
