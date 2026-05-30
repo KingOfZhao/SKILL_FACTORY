@@ -51,6 +51,9 @@
 - **skill-figma-html** - Figma 到 HTML 转换器
 - **skill-优化er** - Skill 优化器
 
+### Flutter 代码实现强化（2026-05-30 更新）
+- **meta-flutter-impl-distillation** - 元-Flutter 代码实现蒸馏器。将强模型（Opus 级）的隐性 Flutter 实现策略蒸馏为显式的决策树 / 实现 playbook / 反模式库 / 自检闭环，并叠加在 [Flutter 官方 Skill](https://github.com/flutter/skills) 与 [AI Rules](https://docs.flutter.dev/ai/ai-rules) 之上，使普通模型在 Flutter 代码实现上接近强模型质量。与 `flutter_factory`（负责"生成什么"）互补，本 Skill 负责"如何实现到高质量"。
+
 ### 56 个新技能（2026-02-27 更新）
 
 #### 优先级 1 - 环节通信协议（5 个基础技能）
