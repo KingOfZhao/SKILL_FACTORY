@@ -1,7 +1,7 @@
-<!-- 本文件由 scan_skills.py 自动生成，请勿手工编辑 -->
+<!-- 本文件由 skill_factory.catalog 自动生成，请勿手工编辑 -->
 # Skill 能力清单（自动生成）
 
-- 扫描根目录：`.claude/skills`
+- 扫描根目录：`/home/ubuntu/SKILL_FACTORY/.claude/skills`
 - 技能总数：**62**（元 Skill 18 / 任务型 44）
 
 ## 技能列表

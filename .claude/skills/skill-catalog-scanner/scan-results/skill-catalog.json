@@ -1,5 +1,5 @@
 {
-  "root": ".claude/skills",
+  "root": "/home/ubuntu/SKILL_FACTORY/.claude/skills",
   "total": 62,
   "meta_count": 18,
   "task_count": 44,
