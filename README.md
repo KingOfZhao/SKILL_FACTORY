@@ -53,6 +53,13 @@
 
 ### Flutter 代码实现强化（2026-05-30 更新）
 - **meta-flutter-impl-distillation** - 元-Flutter 代码实现蒸馏器。将强模型（Opus 级）的隐性 Flutter 实现策略蒸馏为显式的决策树 / 实现 playbook / 反模式库 / 自检闭环，并叠加在 [Flutter 官方 Skill](https://github.com/flutter/skills) 与 [AI Rules](https://docs.flutter.dev/ai/ai-rules) 之上，使普通模型在 Flutter 代码实现上接近强模型质量。与 `flutter_factory`（负责"生成什么"）互补，本 Skill 负责"如何实现到高质量"。
+  - **A｜可执行扫描器** `meta-flutter-impl-distillation/scripts/flutter_lint_scan.py`：零依赖静态扫描 `.dart`，检测 build() 内请求 / 缺 const / 滥用 `!` / 长列表用 Column 等反模式，输出 JSON + 退出码，`--selftest` 自检。
+  - **E｜领域无关泛化** **meta-capability-distillation** - 元-能力蒸馏器。把"强模型→普通模型"的蒸馏方法（4 载体 + 自检闭环）抽象为任意领域可复用的模板与实例化指南，`meta-flutter-impl-distillation` 即其 Flutter 实例。
+
+### 技能工厂基础设施强化（2026-05-30 更新）
+- **B｜检查器修复+增强** `元/meta-skill-enhancer/output/meta_skill_checker.py`：修复完美通过时的除零 bug、改为按规则维度统计通过率、支持中文章节别名（输入规范/输出规范）、按底层约定对元 Skill 豁免任务型校验，新增命令行入口（单文件/目录批量 + `--summary` + `--json`）。
+- **C｜技能目录自动同步** `skill-catalog-scanner/scan_skills.py`：零依赖扫描 `.claude/skills`，生成 `skill-catalog.md` + `skill-catalog.json`，`--check` 校验清单是否最新（CI 友好）。
+- **D｜全链路接入** `元/元-skill-orchestrator/orchestrator.py` 新增技能推荐注册表与 `--recommend`，`problem-domain-mapper` 登记 `flutter-implementation → meta-flutter-impl-distillation` 映射。
 
 ### 56 个新技能（2026-02-27 更新）
 

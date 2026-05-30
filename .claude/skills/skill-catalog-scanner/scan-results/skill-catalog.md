@@ -2,13 +2,14 @@
 # Skill 能力清单（自动生成）
 
 - 扫描根目录：`.claude/skills`
-- 技能总数：**61**（元 Skill 17 / 任务型 44）
+- 技能总数：**62**（元 Skill 18 / 任务型 44）
 
 ## 技能列表
 
 | 类型 | 名称 | 描述 | 路径 |
 |------|------|------|------|
 | 元 | `元-micro-diff-factory` | 微分 Skill 组 - 支持对任意问题/需求的微分拆解，自动积累拆解案例、公式、约束等 | `mate-skill-微分器` |
+| 元 | `meta-capability-distillation` | 元-能力蒸馏器 - 将强模型(如 Opus 级)在任意领域的隐性实现/解题策略蒸馏为显式的决策树/playbook/反模式库/自检闭环，使普通模型在该领域的产出质量接近强模型。是 meta-flutter-impl-distillation | `meta-capability-distillation` |
 | 元 | `meta-flutter-impl-distillation` | 元-Flutter 代码实现蒸馏器 - 将强模型(Opus 级)的隐性 Flutter 实现策略蒸馏为显式决策树/实现 playbook/反模式库/自检闭环，叠加在 Flutter 官方 Skill 与 AI Rules 之上，使普通模型在 | `meta-flutter-impl-distillation` |
 | 元 | `元-skill-穷举器（增强版 v2.0）` | 对任意问题进行无限横竖穷举「物理实践」或「最小Skill树」，并自动收集领域最佳实践和积累通用模式，增强生成技能质量和兼容性。 | `meta-skill-enhancer` |
 | 元 | `meta-skill-dependency-analyzer` | 元-Skill 依赖关系分析，绘制技能依赖图 | `元/meta-skill-dependency-analyzer` |
@@ -116,6 +117,7 @@
     - 📦 flutter-gitlab-ci-generator
     - 📦 flutter-k8s-deployer
 - 📦 mate-skill-微分器
+- 📦 meta-capability-distillation
 - 📦 meta-flutter-impl-distillation
 - 📦 meta-skill-enhancer
 - 📦 problem-domain-mapper

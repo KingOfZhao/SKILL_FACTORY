@@ -94,8 +94,15 @@ class MetaSkillChecker:
         results = []
         start_time = datetime.now()
 
-        # 执行所有验证规则
-        for rule in self.rules:
+        # 元 Skill 豁免：按底层约定 validation.enabled_for=non_meta_only。
+        is_meta = self._is_meta_skill(skill_name, skill_content)
+        # 元 Skill 仅保留通用的 structure / documentation；
+        # best-practices / patterns / consistency 含 Flutter/任务型专属检查，对元 Skill 跳过。
+        skipped_categories = {'best-practices', 'patterns', 'consistency'} if is_meta else set()
+        applicable_rules = [r for r in self.rules if r.category not in skipped_categories]
+
+        # 执行验证规则
+        for rule in applicable_rules:
             try:
                 if rule.category == 'structure':
                     results.extend(self._validate_structure(rule, skill_content, skill_path))
@@ -120,8 +127,8 @@ class MetaSkillChecker:
 
         duration = (datetime.now() - start_time).total_seconds()
 
-        # 统计结果（results 仅记录"失败项"；按规则维度计算通过率）
-        total = len(self.rules)
+        # 统计结果（results 仅记录"失败项"；按实际执行的规则维度计算通过率）
+        total = len(applicable_rules)
         failed_rule_ids = {r.rule_id for r in results}
         failed = len(failed_rule_ids)
         passed = max(total - failed, 0)
@@ -346,6 +353,21 @@ class MetaSkillChecker:
         ]
 
         print(f"[检查器] 已加载 {len(self.rules)} 个验证规则")
+
+    def _is_meta_skill(self, skill_name: str, content: str) -> bool:
+        """判定是否元 Skill（meta-/元- 前缀，或机器可读块声明 type: meta / validation_exempt: true）。"""
+        name = (skill_name or "").lower()
+        if name.startswith("meta-") or skill_name.startswith("元-") or skill_name.startswith("元"):
+            return True
+        # 从 frontmatter 的 name 字段判定（skill_name 可能只是文件名 'SKILL'）
+        m = re.search(r'(?m)^\s*name\s*:\s*["\']?\s*(meta-|元)', content)
+        if m:
+            return True
+        if re.search(r'(?m)^\s*type\s*:\s*meta\b', content):
+            return True
+        if re.search(r'(?m)^\s*validation_exempt\s*:\s*true\b', content):
+            return True
+        return False
 
     def _validate_structure(self, rule: ValidationRule, content: str, path: str) -> List[ValidationResult]:
         """验证结构"""
