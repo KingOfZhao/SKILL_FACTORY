@@ -729,7 +729,9 @@ RepaintBoundary(
 # 示例使用
 if __name__ == "__main__":
     generator = OptimizationSuggestionGenerator(
-        reference_cases_path="/Users/administruter/Desktop/skill_factory/.claude/skills/micro-diff-factory/references/micro-diff-cases"
+        reference_cases_path=str(
+            Path(__file__).resolve().parents[1] / "references" / "micro-diff-cases"
+        )
     )
 
     # 示例 1: 蓝牙连接优化建议

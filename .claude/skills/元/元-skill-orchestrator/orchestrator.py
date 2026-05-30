@@ -13,43 +13,27 @@ from datetime import datetime
 from typing import Dict, List, Optional
 import subprocess
 
-
-# 问题类型 -> 推荐技能注册表（全链路接入：问题域映射 / 编排器共用）
-# 每项：关键词命中即推荐对应技能，confidence 为基础置信度。
-SKILL_RECOMMENDATION_REGISTRY: List[Dict] = [
-    {
-        "skill_name": "meta-flutter-impl-distillation",
-        "domain": "flutter-implementation",
-        "keywords": [
-            "flutter", "dart", "widget", "状态管理", "listview",
-            "build(", "provider", "riverpod", "bloc", "setstate",
-        ],
-        "confidence": 0.9,
-        "description": "将强模型隐性 Flutter 实现策略蒸馏为显式决策树/反模式/自检，提升普通模型实现质量",
-    },
-]
+# 技能根目录：本文件位于 .claude/skills/元/元-skill-orchestrator/，向上三级即 .claude/skills。
+# 取代此前硬编码的 macOS 绝对路径，保证任意机器/CI 可用。
+SKILLS_ROOT = Path(__file__).resolve().parents[2]
 
 
-def recommend_skills(request: str, registry: Optional[List[Dict]] = None) -> List[Dict]:
-    """根据问题描述匹配推荐技能（关键词命中比例加权置信度）。"""
-    registry = registry if registry is not None else SKILL_RECOMMENDATION_REGISTRY
-    text = request.lower()
-    recommendations = []
-    for entry in registry:
-        hits = [kw for kw in entry["keywords"] if kw.lower() in text]
-        if not hits:
-            continue
-        ratio = len(hits) / len(entry["keywords"])
-        confidence = round(entry["confidence"] * (0.6 + 0.4 * ratio), 4)
-        recommendations.append({
-            "skill_name": entry["skill_name"],
-            "domain": entry["domain"],
-            "matched_keywords": hits,
-            "confidence": confidence,
-            "description": entry["description"],
-        })
-    recommendations.sort(key=lambda r: r["confidence"], reverse=True)
-    return recommendations
+def _bootstrap_skill_factory() -> None:
+    """未安装包时，向上查找仓库根并加入 sys.path，使 skill_factory 可导入。"""
+    for parent in Path(__file__).resolve().parents:
+        if (parent / "skill_factory" / "__init__.py").exists():
+            if str(parent) not in sys.path:
+                sys.path.insert(0, str(parent))
+            return
+
+
+_bootstrap_skill_factory()
+
+# 推荐逻辑已收敛至工程层 skill_factory.recommend，此处仅复用以避免注册表重复维护。
+from skill_factory.recommend import (  # noqa: E402
+    SKILL_RECOMMENDATION_REGISTRY,
+    recommend_skills,
+)
 
 
 class SkillOrchestrator:
@@ -147,7 +131,7 @@ class SkillOrchestrator:
 
         # 调用微分拆解器
         # 注意：这里假设微分拆解器已经作为 Skill 存在
-        diff_decomposer_path = Path("/Users/administruter/Desktop/skill_factory/.claude/skills/micro-diff-factory")
+        diff_decomposer_path = SKILLS_ROOT / "micro-diff-factory"
 
         # 检查问题分类器
         classifier_path = diff_decomposer_path / "analyzer" / "problem_classifier.py"
@@ -234,7 +218,7 @@ class SkillOrchestrator:
         # 扫描生成的技能和参考案例
         # 这里应该调用实际的扫描器
 
-        micro_diff_path = Path("/Users/administruter/Desktop/skill_factory/.claude/skills/micro-diff-factory")
+        micro_diff_path = SKILLS_ROOT / "micro-diff-factory"
         reference_cases_path = micro_diff_path / "references" / "micro-diff-cases"
 
         capabilities = []
@@ -295,7 +279,7 @@ class SkillOrchestrator:
 
         for capability in capabilities:
             # 简单验证：文件是否存在
-            capability_path = Path("/Users/administruter/Desktop/skill_factory/.claude/skills/micro-diff-factory") / capability.get("path", "")
+            capability_path = SKILLS_ROOT / "micro-diff-factory" / capability.get("path", "")
             if capability_path.exists():
                 passed += 1
             else:

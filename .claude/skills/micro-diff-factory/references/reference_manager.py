@@ -712,7 +712,7 @@ class ReferenceManager:
 # 示例使用
 if __name__ == "__main__":
     manager = ReferenceManager(
-        base_path="/Users/administruter/Desktop/skill_factory/.claude/skills/micro-diff-factory/references/micro-diff-cases"
+        base_path=str(Path(__file__).resolve().parent / "micro-diff-cases")
     )
 
     # 扫描目录
