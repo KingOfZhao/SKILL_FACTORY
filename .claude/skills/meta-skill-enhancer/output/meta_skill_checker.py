@@ -5,9 +5,11 @@
 最佳实践应用和模式使用情况。
 """
 
+import argparse
 import json
 import os
 import re
+import sys
 from typing import List, Dict, Set, Optional, Tuple
 from datetime import datetime
 from dataclasses import dataclass, field
@@ -118,10 +120,11 @@ class MetaSkillChecker:
 
         duration = (datetime.now() - start_time).total_seconds()
 
-        # 统计结果
-        total = len(results)
-        passed = sum(1 for r in results if r.passed)
-        failed = total - passed
+        # 统计结果（results 仅记录"失败项"；按规则维度计算通过率）
+        total = len(self.rules)
+        failed_rule_ids = {r.rule_id for r in results}
+        failed = len(failed_rule_ids)
+        passed = max(total - failed, 0)
 
         critical = sum(1 for r in results if r.severity == 'critical')
         major_issues = sum(1 for r in results if r.severity == 'major')
@@ -131,9 +134,11 @@ class MetaSkillChecker:
         # 计算合规性分数
         best_practices_compliance = self._calculate_best_practices_score(results)
         pattern_usage_score = self._calculate_pattern_score(results)
+        # 结构性通过率：避免无失败项时除零（perfect-pass bug 修复）
+        structural_pass_rate = (passed / total) if total else 1.0
         overall_score = (best_practices_compliance * 0.4 +
                        pattern_usage_score * 0.3 +
-                       (passed / total) * 0.3)
+                       structural_pass_rate * 0.3)
 
         # 生成推荐
         recommendations = self._generate_recommendations(results, skill_name)
@@ -358,18 +363,22 @@ class MetaSkillChecker:
                 suggested_fix="添加：\n---\nname: [Skill名称]"
             ))
 
-        # 规则 2: 必需章节
-        required_sections = ['## Capabilities', '## Input Specification', '## Output Specification']
-        for section in required_sections:
-            if section not in content:
+        # 规则 2: 必需章节（支持中英文别名）
+        required_sections = {
+            'Capabilities': ['## Capabilities', '## 能力', '## 能力说明'],
+            'Input Specification': ['## Input Specification', '## 输入规范', '## 输入'],
+            'Output Specification': ['## Output Specification', '## 输出规范', '## 输出'],
+        }
+        for canonical, aliases in required_sections.items():
+            if not any(alias in content for alias in aliases):
                 results.append(ValidationResult(
                     rule_id=rule.rule_id,
                     rule_name=rule.name,
                     passed=False,
                     severity=rule.severity,
-                    message=f"缺少必需章节: {section}",
+                    message=f"缺少必需章节: {canonical}",
                     location=path,
-                    suggested_fix=f"添加 {section} 章节"
+                    suggested_fix=f"添加 {canonical}（或中文别名 {aliases[1]}）章节"
                 ))
 
         return results
@@ -697,7 +706,7 @@ class MetaSkillChecker:
             f"- 次要问题: {total_minor}",
             f"- 警告: {total_warnings}",
             f"- 平均合规分数: {avg_score:.2f}",
-            ""
+            "",
             "## 需要修复的 Skills（按分数排序）",
             ""
         ])
@@ -713,7 +722,7 @@ class MetaSkillChecker:
                 f"- 最佳实践合规: {report.best_practices_compliance:.2f}",
                 f"- 模式使用: {report.pattern_usage_score:.2f}",
                 f"",
-                "**问题**: {len([r for r in report.results if not r.passed])}",
+                f"**问题**: {len([r for r in report.results if not r.passed])}",
                 ""
             ])
 
@@ -723,3 +732,58 @@ class MetaSkillChecker:
                     lines.append(f"- {rec}")
 
         return "\n".join(lines)
+
+
+def main(argv: Optional[List[str]] = None) -> int:
+    """命令行入口：校验单个 SKILL.md 或递归校验目录下全部 Skill。"""
+    parser = argparse.ArgumentParser(
+        description="元 Skill 检查器：验证 SKILL.md 是否符合元 Skill 体系约定"
+    )
+    parser.add_argument("path", help="单个 SKILL.md 文件，或包含多个 Skill 的目录")
+    parser.add_argument("--summary", action="store_true", help="输出批量汇总报告")
+    parser.add_argument("--json", dest="json_out", help="将报告写入 JSON 文件")
+    args = parser.parse_args(argv)
+
+    checker = MetaSkillChecker({})
+
+    if os.path.isdir(args.path):
+        reports = checker.validate_multiple_skills(args.path)
+    else:
+        reports = [checker.validate_skill(args.path)]
+
+    if args.json_out:
+        payload = [
+            {
+                "skill_name": r.skill_name,
+                "skill_path": r.skill_path,
+                "overall_score": round(r.overall_score, 4),
+                "best_practices_compliance": round(r.best_practices_compliance, 4),
+                "pattern_usage_score": round(r.pattern_usage_score, 4),
+                "passed_rules": r.passed_rules,
+                "failed_rules": r.failed_rules,
+                "issues": [
+                    {"rule_id": x.rule_id, "severity": x.severity, "message": x.message}
+                    for x in r.results
+                    if not x.passed
+                ],
+            }
+            for r in reports
+        ]
+        with open(args.json_out, "w", encoding="utf-8") as fh:
+            json.dump(payload, fh, ensure_ascii=False, indent=2)
+
+    if args.summary or len(reports) > 1:
+        print(checker.generate_validation_summary(reports))
+
+    # 退出码：存在 critical/major 失败 → 1
+    has_blocking = any(
+        x.severity in ("critical", "major")
+        for r in reports
+        for x in r.results
+        if not x.passed
+    )
+    return 1 if has_blocking else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

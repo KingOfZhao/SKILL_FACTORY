@@ -126,8 +126,9 @@ output/<iteration-id>/
 2. **决策树可用性**（<3 分钟）：打开 `references/decision-trees.md`，对"本地单值状态"应得出 `ValueNotifier + ValueListenableBuilder`。
 3. **反模式覆盖**（<3 分钟）：打开 `references/anti-patterns.md`，确认含 `build()` 内网络请求、缺 `const`、滥用 `!`、长列表用 `Column` 等条目，且每条有"错误→修正"对照。
 4. **自检命令可运行**（<2 分钟）：`references/self-review-checklist.md` 中的 `dart format .`、`flutter analyze`、`flutter test` 为标准命令，可直接复制执行。
+5. **扫描器自检**（<1 分钟）：`python3 scripts/flutter_lint_scan.py --selftest` 应输出 `SELFTEST PASS`（零依赖，验证反模式检测有效）。
 
-成功标志：以上 4 项齐全且内容自洽。
+成功标志：以上 5 项齐全且内容自洽。
 
 ## Limitations（必须声明）
 

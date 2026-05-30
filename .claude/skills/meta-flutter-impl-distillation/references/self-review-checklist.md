@@ -21,6 +21,18 @@
 - [ ] AP-13 重解析用 compute()
 - [ ] AP-14 命名/行宽/函数长度合规
 
+## A.0 自动化反模式扫描（先跑，无需 Flutter SDK）
+本 Skill 自带零依赖扫描器，可直接对生成的 Dart 代码做 AP-1/3/4/6/9/13 自动检测：
+
+```bash
+# 扫描目录或文件，命中 major/critical 时退出码为 1
+python3 scripts/flutter_lint_scan.py lib/ --format text
+python3 scripts/flutter_lint_scan.py lib/ --format json --json scan.json
+# 脚本自检（约 10 秒）
+python3 scripts/flutter_lint_scan.py --selftest
+```
+把 JSON 报告并入 distillation-report.md；扫描器为启发式补充，不替代 `flutter analyze`。
+
 ## B. 正向 Guardrail（命令）
 **若 Dart/Flutter MCP 已连接**：优先用 MCP 的 `dart_format` / `dart_fix` / `analyze_files` 工具执行，并标注"已使用 Dart/Flutter MCP …"。
 **否则**用本地 SDK 命令：
