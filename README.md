@@ -61,6 +61,36 @@
 - **C｜技能目录自动同步** `skill-catalog-scanner/scan_skills.py`：零依赖扫描 `.claude/skills`，生成 `skill-catalog.md` + `skill-catalog.json`，`--check` 校验清单是否最新（CI 友好）。
 - **D｜全链路接入** `元/元-skill-orchestrator/orchestrator.py` 新增技能推荐注册表与 `--recommend`，`problem-domain-mapper` 登记 `flutter-implementation → meta-flutter-impl-distillation` 映射。
 
+## 工程化层 `skill_factory/`（2026-05-30 更新）
+
+跨技能的工厂级可执行能力已收敛为一个**可安装、可测试、可 CI** 的统一 Python 包，
+各技能目录下的原脚本保留为**薄壳转调**，既有调用方式不回归。
+
+```bash
+make install                               # pip install -e ".[dev]"
+make ci                                    # lint + 格式 + mypy + 测试覆盖 + 清单漂移门禁
+
+skill-factory lint <path|--selftest>       # A：Dart 反模式静态扫描
+skill-factory scan [root] [--check]        # C：技能目录扫描 / 能力清单同步
+skill-factory check <path> [--summary]     # B：元 Skill 规范校验
+skill-factory recommend "<需求描述>"        # D：问题域 → 技能推荐
+```
+
+| 模块 | 能力 | 薄壳位置（向后兼容） |
+|------|------|----------------------|
+| `skill_factory/lint.py` | Dart 反模式扫描（A） | `meta-flutter-impl-distillation/scripts/flutter_lint_scan.py` |
+| `skill_factory/catalog.py` | 技能目录 / 清单同步（C） | `skill-catalog-scanner/scan_skills.py` |
+| `skill_factory/checker.py` | 元 Skill 规范校验（B） | `meta-skill-enhancer/output/meta_skill_checker.py` |
+| `skill_factory/recommend.py` | 问题域 → 技能推荐（D） | 由 `元/元-skill-orchestrator/orchestrator.py` 复用 |
+| `skill_factory/paths.py` | 仓库根 / 技能目录解析（去硬编码路径） | — |
+| `skill_factory/cli.py` | 统一命令行入口 `skill-factory` | — |
+
+- **零运行时依赖**：包仅用标准库；开发依赖为 `ruff` / `mypy` / `pytest` / `pytest-cov`。
+- **质量门禁**：GitHub Actions（`.github/workflows/ci.yml`，Python 3.10 + 3.12 矩阵）跑 ruff、mypy、
+  pytest（覆盖率 91%）与技能清单漂移校验；本地可 `make ci` 复跑，或用 `pre-commit` 在提交前自动检查。
+- **健壮性**：移除了历史脚本中的硬编码 macOS 绝对路径，改用基于 `__file__` 的目录解析，任意机器 / CI 可用。
+- 详见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
 ### 56 个新技能（2026-02-27 更新）
 
 #### 优先级 1 - 环节通信协议（5 个基础技能）
