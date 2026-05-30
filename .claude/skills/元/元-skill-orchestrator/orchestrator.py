@@ -14,6 +14,44 @@ from typing import Dict, List, Optional
 import subprocess
 
 
+# 问题类型 -> 推荐技能注册表（全链路接入：问题域映射 / 编排器共用）
+# 每项：关键词命中即推荐对应技能，confidence 为基础置信度。
+SKILL_RECOMMENDATION_REGISTRY: List[Dict] = [
+    {
+        "skill_name": "meta-flutter-impl-distillation",
+        "domain": "flutter-implementation",
+        "keywords": [
+            "flutter", "dart", "widget", "状态管理", "listview",
+            "build(", "provider", "riverpod", "bloc", "setstate",
+        ],
+        "confidence": 0.9,
+        "description": "将强模型隐性 Flutter 实现策略蒸馏为显式决策树/反模式/自检，提升普通模型实现质量",
+    },
+]
+
+
+def recommend_skills(request: str, registry: Optional[List[Dict]] = None) -> List[Dict]:
+    """根据问题描述匹配推荐技能（关键词命中比例加权置信度）。"""
+    registry = registry if registry is not None else SKILL_RECOMMENDATION_REGISTRY
+    text = request.lower()
+    recommendations = []
+    for entry in registry:
+        hits = [kw for kw in entry["keywords"] if kw.lower() in text]
+        if not hits:
+            continue
+        ratio = len(hits) / len(entry["keywords"])
+        confidence = round(entry["confidence"] * (0.6 + 0.4 * ratio), 4)
+        recommendations.append({
+            "skill_name": entry["skill_name"],
+            "domain": entry["domain"],
+            "matched_keywords": hits,
+            "confidence": confidence,
+            "description": entry["description"],
+        })
+    recommendations.sort(key=lambda r: r["confidence"], reverse=True)
+    return recommendations
+
+
 class SkillOrchestrator:
     """Skill 编排器"""
 
@@ -418,6 +456,8 @@ python reference_manager.py verify
             return "蓝牙连接"
         elif any(kw in request_lower for kw in ["rssi", "chart", "图表", "signal"]):
             return "RSSI 图表"
+        elif any(kw in request_lower for kw in ["flutter", "dart", "widget", "状态管理", "listview"]):
+            return "Flutter 实现"
         elif any(kw in request_lower for kw in ["性能", "performance", "优化", "慢"]):
             return "性能优化"
         elif any(kw in request_lower for kw in ["算法", "algorithm", "排序", "搜索"]):
@@ -514,6 +554,8 @@ def main():
     parser = argparse.ArgumentParser(description="元 Skill 全链路编排器")
 
     parser.add_argument("user_request", help="用户需求描述")
+    parser.add_argument("--recommend", action="store_true",
+                       help="仅按需求文本输出推荐技能（JSON），不执行全链路")
     parser.add_argument("--full-chain", action="store_true", default=True,
                        help="完整自动链路（默认）")
     parser.add_argument("--start-at", type=str, choices=["diff-decomposer", "enumerator", "generator", "scanner", "checker", "optimizer"],
@@ -530,6 +572,16 @@ def main():
                        help="迭代 ID")
 
     args = parser.parse_args()
+
+    # 仅推荐模式：轻量、可独立验证，不触发全链路
+    if args.recommend:
+        recs = recommend_skills(args.user_request)
+        print(json.dumps({
+            "input": args.user_request,
+            "recommended_skills": recs,
+            "total": len(recs),
+        }, ensure_ascii=False, indent=2))
+        return
 
     # 创建编排器
     orchestrator = SkillOrchestrator(
