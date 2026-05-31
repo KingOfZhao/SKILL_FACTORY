@@ -13,6 +13,28 @@ from datetime import datetime
 from typing import Dict, List, Optional
 import subprocess
 
+# 技能根目录：本文件位于 .claude/skills/元/元-skill-orchestrator/，向上三级即 .claude/skills。
+# 取代此前硬编码的 macOS 绝对路径，保证任意机器/CI 可用。
+SKILLS_ROOT = Path(__file__).resolve().parents[2]
+
+
+def _bootstrap_skill_factory() -> None:
+    """未安装包时，向上查找仓库根并加入 sys.path，使 skill_factory 可导入。"""
+    for parent in Path(__file__).resolve().parents:
+        if (parent / "skill_factory" / "__init__.py").exists():
+            if str(parent) not in sys.path:
+                sys.path.insert(0, str(parent))
+            return
+
+
+_bootstrap_skill_factory()
+
+# 推荐逻辑已收敛至工程层 skill_factory.recommend，此处仅复用以避免注册表重复维护。
+from skill_factory.recommend import (  # noqa: E402
+    SKILL_RECOMMENDATION_REGISTRY,
+    recommend_skills,
+)
+
 
 class SkillOrchestrator:
     """Skill 编排器"""
@@ -109,7 +131,7 @@ class SkillOrchestrator:
 
         # 调用微分拆解器
         # 注意：这里假设微分拆解器已经作为 Skill 存在
-        diff_decomposer_path = Path("/Users/administruter/Desktop/skill_factory/.claude/skills/micro-diff-factory")
+        diff_decomposer_path = SKILLS_ROOT / "micro-diff-factory"
 
         # 检查问题分类器
         classifier_path = diff_decomposer_path / "analyzer" / "problem_classifier.py"
@@ -196,7 +218,7 @@ class SkillOrchestrator:
         # 扫描生成的技能和参考案例
         # 这里应该调用实际的扫描器
 
-        micro_diff_path = Path("/Users/administruter/Desktop/skill_factory/.claude/skills/micro-diff-factory")
+        micro_diff_path = SKILLS_ROOT / "micro-diff-factory"
         reference_cases_path = micro_diff_path / "references" / "micro-diff-cases"
 
         capabilities = []
@@ -257,7 +279,7 @@ class SkillOrchestrator:
 
         for capability in capabilities:
             # 简单验证：文件是否存在
-            capability_path = Path("/Users/administruter/Desktop/skill_factory/.claude/skills/micro-diff-factory") / capability.get("path", "")
+            capability_path = SKILLS_ROOT / "micro-diff-factory" / capability.get("path", "")
             if capability_path.exists():
                 passed += 1
             else:
@@ -418,6 +440,8 @@ python reference_manager.py verify
             return "蓝牙连接"
         elif any(kw in request_lower for kw in ["rssi", "chart", "图表", "signal"]):
             return "RSSI 图表"
+        elif any(kw in request_lower for kw in ["flutter", "dart", "widget", "状态管理", "listview"]):
+            return "Flutter 实现"
         elif any(kw in request_lower for kw in ["性能", "performance", "优化", "慢"]):
             return "性能优化"
         elif any(kw in request_lower for kw in ["算法", "algorithm", "排序", "搜索"]):
@@ -514,6 +538,8 @@ def main():
     parser = argparse.ArgumentParser(description="元 Skill 全链路编排器")
 
     parser.add_argument("user_request", help="用户需求描述")
+    parser.add_argument("--recommend", action="store_true",
+                       help="仅按需求文本输出推荐技能（JSON），不执行全链路")
     parser.add_argument("--full-chain", action="store_true", default=True,
                        help="完整自动链路（默认）")
     parser.add_argument("--start-at", type=str, choices=["diff-decomposer", "enumerator", "generator", "scanner", "checker", "optimizer"],
@@ -530,6 +556,16 @@ def main():
                        help="迭代 ID")
 
     args = parser.parse_args()
+
+    # 仅推荐模式：轻量、可独立验证，不触发全链路
+    if args.recommend:
+        recs = recommend_skills(args.user_request)
+        print(json.dumps({
+            "input": args.user_request,
+            "recommended_skills": recs,
+            "total": len(recs),
+        }, ensure_ascii=False, indent=2))
+        return
 
     # 创建编排器
     orchestrator = SkillOrchestrator(

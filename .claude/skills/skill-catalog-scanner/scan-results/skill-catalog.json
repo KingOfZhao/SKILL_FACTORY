@@ -1,0 +1,566 @@
+{
+  "root": ".claude/skills",
+  "total": 62,
+  "meta_count": 18,
+  "task_count": 44,
+  "skills": [
+    {
+      "name": "元-micro-diff-factory",
+      "description": "微分 Skill 组 - 支持对任意问题/需求的微分拆解，自动积累拆解案例、公式、约束等",
+      "rel_path": "mate-skill-微分器",
+      "type": "meta",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 275
+    },
+    {
+      "name": "meta-capability-distillation",
+      "description": "元-能力蒸馏器 - 将强模型(如 Opus 级)在任意领域的隐性实现/解题策略蒸馏为显式的决策树/playbook/反模式库/自检闭环，使普通模型在该领域的产出质量接近强模型。是 meta-flutter-impl-distillation 的领域无关泛化模板。",
+      "rel_path": "meta-capability-distillation",
+      "type": "meta",
+      "has_description_md": true,
+      "has_scripts": false,
+      "line_count": 131
+    },
+    {
+      "name": "meta-flutter-impl-distillation",
+      "description": "元-Flutter 代码实现蒸馏器 - 将强模型(Opus 级)的隐性 Flutter 实现策略蒸馏为显式决策树/实现 playbook/反模式库/自检闭环，叠加在 Flutter 官方 Skill 与 AI Rules 之上，使普通模型在 Flutter 代码实现上接近强模型质量。",
+      "rel_path": "meta-flutter-impl-distillation",
+      "type": "meta",
+      "has_description_md": true,
+      "has_scripts": true,
+      "line_count": 167
+    },
+    {
+      "name": "元-skill-穷举器（增强版 v2.0）",
+      "description": "对任意问题进行无限横竖穷举「物理实践」或「最小Skill树」，并自动收集领域最佳实践和积累通用模式，增强生成技能质量和兼容性。",
+      "rel_path": "meta-skill-enhancer",
+      "type": "meta",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 671
+    },
+    {
+      "name": "meta-skill-dependency-analyzer",
+      "description": "元-Skill 依赖关系分析，绘制技能依赖图",
+      "rel_path": "元/meta-skill-dependency-analyzer",
+      "type": "meta",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 155
+    },
+    {
+      "name": "meta-skill-feedback-collector",
+      "description": "元-Skill 反馈收集，用户反馈收集和分析",
+      "rel_path": "元/meta-skill-feedback-collector",
+      "type": "meta",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 209
+    },
+    {
+      "name": "meta-skill-mcp-compatibility-checker",
+      "description": "MCP 兼容性检查，验证元-Skill 与 MCP 的集成正确性",
+      "rel_path": "元/meta-skill-mcp-compatibility-checker",
+      "type": "meta",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 148
+    },
+    {
+      "name": "meta-skill-performance-analyzer",
+      "description": "元-Skill 性能分析，监控执行效率和资源使用",
+      "rel_path": "元/meta-skill-performance-analyzer",
+      "type": "meta",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 174
+    },
+    {
+      "name": "meta-skill-usage-tracker",
+      "description": "元-Skill 使用统计，收集使用数据和反馈",
+      "rel_path": "元/meta-skill-usage-tracker",
+      "type": "meta",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 207
+    },
+    {
+      "name": "meta-skill-validator-advanced",
+      "description": "元-Skill 深度验证，检查元-Skill 自身的质量",
+      "rel_path": "元/meta-skill-validator-advanced",
+      "type": "meta",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 142
+    },
+    {
+      "name": "元-Skill推荐器",
+      "description": "基于问题类型和上下文，自动推荐最优的技能组合",
+      "rel_path": "元/skill-recommender",
+      "type": "meta",
+      "has_description_md": true,
+      "has_scripts": true,
+      "line_count": 234
+    },
+    {
+      "name": "元-skill-orchestrator",
+      "description": "元 Skill 全链路编排器 - 自动串联问题穷举、生成、扫描、检查、优化流程",
+      "rel_path": "元/元-skill-orchestrator",
+      "type": "meta",
+      "has_description_md": false,
+      "has_scripts": true,
+      "line_count": 250
+    },
+    {
+      "name": "元-skill-优化器",
+      "description": "根据检查器结果，对 Skill 或底层约定进行优化",
+      "rel_path": "元/元-skill-优化器",
+      "type": "meta",
+      "has_description_md": true,
+      "has_scripts": true,
+      "line_count": 225
+    },
+    {
+      "name": "元-skill-修复器",
+      "description": "检查目标 skill 目录是否存在以下问题，并生成修复方案：",
+      "rel_path": "元/元-skill-修复器",
+      "type": "meta",
+      "has_description_md": true,
+      "has_scripts": true,
+      "line_count": 58
+    },
+    {
+      "name": "元-skill-扫描器",
+      "description": "扫描指定文件夹下的所有 skills，生成能力清单和树状结构，用于 Claude Code 读取和调用",
+      "rel_path": "元/元-skill-扫描器",
+      "type": "meta",
+      "has_description_md": true,
+      "has_scripts": false,
+      "line_count": 225
+    },
+    {
+      "name": "元-skill-检查器",
+      "description": "按照底层约定检查所有 Skill，自动区分元 Skill / 非元 Skill / 非 Skill 内容",
+      "rel_path": "元/元-skill-检查器",
+      "type": "meta",
+      "has_description_md": true,
+      "has_scripts": true,
+      "line_count": 206
+    },
+    {
+      "name": "元-skill-生成器",
+      "description": "MCP-Aware 高级 Skill 生成器 - 带结构化认知自精炼机制",
+      "rel_path": "元/元-skill-生成器",
+      "type": "meta",
+      "has_description_md": true,
+      "has_scripts": true,
+      "line_count": 32
+    },
+    {
+      "name": "元-skill-问题穷举器",
+      "description": "对任何问题进行无限横竖穷举「物理实践」或「最小Skill树」，上下文即将满额时自动保存穷举节点，下次无缝继续。",
+      "rel_path": "元/元-skill-问题穷举器",
+      "type": "meta",
+      "has_description_md": true,
+      "has_scripts": true,
+      "line_count": 244
+    },
+    {
+      "name": "skill-event-emitter",
+      "description": "环节完成事件通知，触发下一步骤",
+      "rel_path": "basic/skill-event-emitter",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 139
+    },
+    {
+      "name": "skill-payload-validator",
+      "description": "数据包校验，验证数据完整性",
+      "rel_path": "basic/skill-payload-validator",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 143
+    },
+    {
+      "name": "skill-pipeline-retry",
+      "description": "环节失败自动重试，提升容错性",
+      "rel_path": "basic/skill-pipeline-retry",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 152
+    },
+    {
+      "name": "skill-progress-tracker",
+      "description": "全链路进度追踪，实时监控执行状态",
+      "rel_path": "basic/skill-progress-tracker",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 157
+    },
+    {
+      "name": "skill-protocol-adapter",
+      "description": "环节间数据格式标准化，建立统一的消息格式标准",
+      "rel_path": "basic/skill-protocol-adapter",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 164
+    },
+    {
+      "name": "flutter-skill-factory",
+      "description": "元级 Flutter 代码生成工厂 - 支持多种输出粒度的通用 Flutter 项目生成工具",
+      "rel_path": "flutter_factory",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 316
+    },
+    {
+      "name": "flutter-conflict-detector",
+      "description": "自动检测需求冲突",
+      "rel_path": "flutter_factory/1-requirements-layer/flutter-conflict-detector",
+      "type": "task",
+      "has_description_md": true,
+      "has_scripts": false,
+      "line_count": 185
+    },
+    {
+      "name": "flutter-image-to-spec-converter",
+      "description": "从 UI 截图/草图生成技术规格",
+      "rel_path": "flutter_factory/1-requirements-layer/flutter-image-to-spec-converter",
+      "type": "task",
+      "has_description_md": true,
+      "has_scripts": false,
+      "line_count": 166
+    },
+    {
+      "name": "flutter-ml-requirement-prioritizer",
+      "description": "使用 ML 自动预测需求优先级",
+      "rel_path": "flutter_factory/1-requirements-layer/flutter-ml-requirement-prioritizer",
+      "type": "task",
+      "has_description_md": true,
+      "has_scripts": false,
+      "line_count": 163
+    },
+    {
+      "name": "flutter-nlp-requirements-extractor",
+      "description": "使用 NLP 从自然语言需求中提取技术规格",
+      "rel_path": "flutter_factory/1-requirements-layer/flutter-nlp-requirements-extractor",
+      "type": "task",
+      "has_description_md": true,
+      "has_scripts": false,
+      "line_count": 155
+    },
+    {
+      "name": "flutter-voice-requirement-capture",
+      "description": "语音转文字需求录入",
+      "rel_path": "flutter_factory/1-requirements-layer/flutter-voice-requirement-capture",
+      "type": "task",
+      "has_description_md": true,
+      "has_scripts": false,
+      "line_count": 146
+    },
+    {
+      "name": "flutter-clean-architecture-architect",
+      "description": "Clean Architecture 架构设计",
+      "rel_path": "flutter_factory/2-architecture-layer/flutter-clean-architecture-architect",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 108
+    },
+    {
+      "name": "flutter-graphql-schema-designer",
+      "description": "GraphQL schema 设计",
+      "rel_path": "flutter_factory/2-architecture-layer/flutter-graphql-schema-designer",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 71
+    },
+    {
+      "name": "flutter-hybrid-native-bridge-designer",
+      "description": "Flutter-原生混合桥接设计",
+      "rel_path": "flutter_factory/2-architecture-layer/flutter-hybrid-native-bridge-designer",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 64
+    },
+    {
+      "name": "flutter-micro-frontend-planner",
+      "description": "微前端架构规划",
+      "rel_path": "flutter_factory/2-architecture-layer/flutter-micro-frontend-planner",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 64
+    },
+    {
+      "name": "flutter-web3-blockchain-integrator",
+      "description": "Web3/区块链集成设计",
+      "rel_path": "flutter_factory/2-architecture-layer/flutter-web3-blockchain-integrator",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 64
+    },
+    {
+      "name": "flutter-component-library-organizer",
+      "description": "组件库目录组织",
+      "rel_path": "flutter_factory/3-ui-layer/flutter-component-library-organizer",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-design-token-generator",
+      "description": "生成设计系统 Token",
+      "rel_path": "flutter_factory/3-ui-layer/flutter-design-token-generator",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-lottie-animation-integrator",
+      "description": "Lottie 动画集成",
+      "rel_path": "flutter_factory/3-ui-layer/flutter-lottie-animation-integrator",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-responsive-layout-adapter",
+      "description": "多端响应式适配",
+      "rel_path": "flutter_factory/3-ui-layer/flutter-responsive-layout-adapter",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-three-d-viewer-builder",
+      "description": "3D 模型查看器",
+      "rel_path": "flutter_factory/3-ui-layer/flutter-three-d-viewer-builder",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-background-sync-handler",
+      "description": "后台同步处理",
+      "rel_path": "flutter_factory/4-data-layer/flutter-background-sync-handler",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-crypto-data-encryptor",
+      "description": "敏感数据加密",
+      "rel_path": "flutter_factory/4-data-layer/flutter-crypto-data-encryptor",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-graphql-client-builder",
+      "description": "GraphQL 客户端构建",
+      "rel_path": "flutter_factory/4-data-layer/flutter-graphql-client-builder",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-sqlite-optimizer",
+      "description": "SQLite 数据库优化",
+      "rel_path": "flutter_factory/4-data-layer/flutter-sqlite-optimizer",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-websocket-manager",
+      "description": "WebSocket 实时连接管理",
+      "rel_path": "flutter_factory/4-data-layer/flutter-websocket-manager",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-a11y-e2e-tester",
+      "description": "无障碍端到端测试",
+      "rel_path": "flutter_factory/5-testing-layer/flutter-a11y-e2e-tester",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-golden-test-generator",
+      "description": "视觉回归测试",
+      "rel_path": "flutter_factory/5-testing-layer/flutter-golden-test-generator",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-integration-test-builder",
+      "description": "集成测试框架",
+      "rel_path": "flutter_factory/5-testing-layer/flutter-integration-test-builder",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-memory-leak-detector",
+      "description": "内存泄漏检测",
+      "rel_path": "flutter_factory/5-testing-layer/flutter-memory-leak-detector",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-performance-metrics-collector",
+      "description": "性能指标收集器",
+      "rel_path": "flutter_factory/5-testing-layer/flutter-performance-metrics-collector",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-codesign-helper",
+      "description": "代码签名辅助",
+      "rel_path": "flutter_factory/6-deployment-layer/flutter-codesign-helper",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-docker-builder",
+      "description": "Docker 镜像构建",
+      "rel_path": "flutter_factory/6-deployment-layer/flutter-docker-builder",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-firebase-app-distributor",
+      "description": "Firebase 分发",
+      "rel_path": "flutter_factory/6-deployment-layer/flutter-firebase-app-distributor",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-gitlab-ci-generator",
+      "description": "GitLab CI 配置",
+      "rel_path": "flutter_factory/6-deployment-layer/flutter-gitlab-ci-generator",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "flutter-k8s-deployer",
+      "description": "Kubernetes 部署",
+      "rel_path": "flutter_factory/6-deployment-layer/flutter-k8s-deployer",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 27
+    },
+    {
+      "name": "problem-domain-mapper",
+      "description": "问题域到技能映射，智能推荐最相关的技能",
+      "rel_path": "problem-domain-mapper",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 161
+    },
+    {
+      "name": "skill-catalog-scanner",
+      "description": "扫描指定文件夹下的所有 skills，生成能力清单和树状结构",
+      "rel_path": "skill-catalog-scanner",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": true,
+      "line_count": 67
+    },
+    {
+      "name": "skill-deployment-automation",
+      "description": "技能自动部署，一键部署到正式位置",
+      "rel_path": "skill-deployment-automation",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 149
+    },
+    {
+      "name": "skill-figma-html",
+      "description": "将 Figma 设计链接转换为 HTML 文件和相关素材。",
+      "rel_path": "skill-figma-html",
+      "type": "task",
+      "has_description_md": true,
+      "has_scripts": true,
+      "line_count": 124
+    },
+    {
+      "name": "skill-gap-analyzer",
+      "description": "技能缺口分析，发现未被覆盖的需求领域",
+      "rel_path": "skill-gap-analyzer",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 147
+    },
+    {
+      "name": "skill-redundancy-detector",
+      "description": "技能冗余检测，识别功能重复的技能",
+      "rel_path": "skill-redundancy-detector",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 160
+    },
+    {
+      "name": "skill-template-library",
+      "description": "技能模板库，可复用的技能模板集合",
+      "rel_path": "skill-template-library",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 182
+    },
+    {
+      "name": "skill-version-manager",
+      "description": "技能版本管理，版本控制和变更追踪",
+      "rel_path": "skill-version-manager",
+      "type": "task",
+      "has_description_md": false,
+      "has_scripts": false,
+      "line_count": 154
+    }
+  ]
+}

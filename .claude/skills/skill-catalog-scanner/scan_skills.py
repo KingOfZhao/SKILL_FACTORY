@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""meta_skill_checker.py — 薄壳：转调 ``skill_factory.checker``。
+"""scan_skills.py — 薄壳：转调 ``skill_factory.catalog``。
 
-实现已收敛至工程层 ``skill_factory`` 包（见 ``skill_factory/checker.py``）。
+实现已收敛至工程层 ``skill_factory`` 包（见 ``skill_factory/catalog.py``）。
 本文件仅做 sys.path 兜底 + 委托，保证未安装包时
-``python3 meta_skill_checker.py <path> [--summary] [--json out.json]`` 仍可运行。
+``python3 scan_skills.py <root> [--out dir] [--check]`` 仍可运行。
 
-推荐用法：``skill-factory check <path> [--summary] [--json out.json]``
+推荐用法：``skill-factory scan [root] [--out dir] [--check]``
 """
 
 from __future__ import annotations
@@ -26,7 +26,7 @@ def _ensure_importable() -> None:
 
 _ensure_importable()
 
-from skill_factory.checker import main  # noqa: E402
+from skill_factory.catalog import main  # noqa: E402
 
 if __name__ == "__main__":
     sys.exit(main())

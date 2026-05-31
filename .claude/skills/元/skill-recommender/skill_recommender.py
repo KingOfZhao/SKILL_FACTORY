@@ -17,6 +17,9 @@ from enum import Enum
 from pathlib import Path
 from datetime import datetime
 
+# 技能根目录：本文件位于 .claude/skills/元/skill-recommender/，向上三级即 .claude/skills。
+SKILLS_ROOT = Path(__file__).resolve().parents[2]
+
 
 class ProblemDomain(Enum):
     """问题领域"""
@@ -83,7 +86,7 @@ class SkillRecommender:
 
     def load_skills_database(self):
         """加载技能数据库"""
-        scan_results = Path("/Users/administruter/Desktop/skill_factory/.claude/skills/元/元-skill-扫描器/output")
+        scan_results = SKILLS_ROOT / "元" / "元-skill-扫描器" / "output"
 
         if not scan_results.exists():
             print("警告：未找到扫描结果，使用默认技能库")
@@ -516,7 +519,7 @@ class SkillRecommender:
 
 # 示例使用
 if __name__ == "__main__":
-    recommender = SkillRecommender("/Users/administruter/Desktop/skill_factory/.claude/skills")
+    recommender = SkillRecommender(str(SKILLS_ROOT))
 
     print("=" * 60)
     print("技能推荐引擎 - 示例")

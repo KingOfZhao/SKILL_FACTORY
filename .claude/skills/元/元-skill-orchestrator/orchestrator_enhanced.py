@@ -20,6 +20,9 @@ from typing import Dict, List, Optional, Tuple
 import subprocess
 import traceback
 
+# 技能根目录：本文件位于 .claude/skills/元/元-skill-orchestrator/，向上三级即 .claude/skills。
+SKILLS_ROOT = Path(__file__).resolve().parents[2]
+
 
 class SkillOrchestratorEnhanced:
     """增强版 Skill 编排器 - 真实串联各环节"""
@@ -38,7 +41,7 @@ class SkillOrchestratorEnhanced:
         self.verbose = verbose
 
         # 元-skills 路径
-        self.skills_base_path = Path("/Users/administruter/Desktop/skill_factory/.claude/skills")
+        self.skills_base_path = SKILLS_ROOT
 
         # 创建输出目录
         self.output_dir.mkdir(parents=True, exist_ok=True)

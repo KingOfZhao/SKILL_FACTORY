@@ -141,3 +141,20 @@ common/underlying-convention.md
 output/
 └── recommendation-report.json    # 推荐报告
 ```
+
+## 已注册领域映射（全链路）
+
+下表为已登记的「问题域 → 推荐技能」映射，可运行实现见
+`元/元-skill-orchestrator/orchestrator.py` 的 `SKILL_RECOMMENDATION_REGISTRY`
+与 `recommend_skills()`（编排器与本映射器共用同一注册表）。
+
+| 问题域 | 触发关键词（任一命中） | 推荐技能 | 基础置信度 |
+|--------|------------------------|----------|------------|
+| flutter-implementation | flutter / dart / widget / 状态管理 / listview / build( / provider / riverpod / bloc / setstate | `meta-flutter-impl-distillation` | 0.9 |
+
+可直接验证（无需跑全链路）：
+```bash
+python3 .claude/skills/元/元-skill-orchestrator/orchestrator.py \
+  "用 flutter 实现带状态管理的 ListView 页面" --recommend
+# 预期 recommended_skills 含 meta-flutter-impl-distillation
+```

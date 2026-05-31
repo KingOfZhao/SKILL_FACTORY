@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skill-factory"
+version = "0.1.0"
+description = "工程级 Skill 工厂：技能反模式扫描、目录同步、元 Skill 校验与推荐的统一工具包"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "KingOfZhao" }]
+keywords = ["claude", "skills", "meta-skill", "flutter", "lint", "distillation"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: Apache Software License",
+]
+# 运行时零第三方依赖（仅标准库），延续仓库“零安装即可用”的设计原则。
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.5",
+    "mypy>=1.8",
+    "pytest>=8.0",
+    "pytest-cov>=4.0",
+]
+
+[project.scripts]
+skill-factory = "skill_factory.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/KingOfZhao/SKILL_FACTORY"
+Repository = "https://github.com/KingOfZhao/SKILL_FACTORY"
+
+[tool.setuptools]
+packages = ["skill_factory"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+# 仅对工程层 Python 包与测试启用；技能目录内的历史脚本暂不纳入（逐步迁移）。
+include = ["skill_factory/**/*.py", "tests/**/*.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+files = ["skill_factory"]
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
