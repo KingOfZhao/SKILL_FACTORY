@@ -77,3 +77,18 @@ def test_main_generate(tmp_path) -> None:
     out = tmp_path / "o"
     assert catalog.main([str(tmp_path), "--out", str(out)]) == 0
     assert (out / "skill-catalog.md").exists()
+
+
+def test_display_root_is_repo_relative(tmp_path) -> None:
+    """位于仓库内的扫描根目录应渲染为相对仓库根的稳定路径（避免机器相关绝对路径）。"""
+    (tmp_path / "pyproject.toml").write_text("[project]\nname='x'\n", encoding="utf-8")
+    skills_root = tmp_path / ".claude" / "skills"
+    skills_root.mkdir(parents=True)
+    assert catalog.display_root(str(skills_root)) == ".claude/skills"
+
+
+def test_display_root_falls_back_outside_repo(tmp_path) -> None:
+    """无仓库标记时回退为 basename，不泄露绝对路径。"""
+    d = tmp_path / "loose-skills"
+    d.mkdir()
+    assert catalog.display_root(str(d)) == "loose-skills"

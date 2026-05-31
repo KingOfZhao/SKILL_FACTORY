@@ -17,7 +17,7 @@ import os
 import re
 from dataclasses import asdict, dataclass
 
-from .paths import skills_dir
+from .paths import find_repo_root, skills_dir
 
 
 @dataclass
@@ -158,6 +158,22 @@ def render_json(skills: list[SkillInfo], root: str) -> str:
     return json.dumps(payload, ensure_ascii=False, indent=2)
 
 
+def display_root(root: str) -> str:
+    """把扫描根目录转为相对仓库根的稳定路径，避免清单嵌入机器相关绝对路径。
+
+    无法定位到仓库根（root 不在仓库内）时回退为 basename。
+    """
+    abs_root = os.path.abspath(root)
+    try:
+        repo_root = str(find_repo_root(abs_root))
+        rel = os.path.relpath(abs_root, repo_root)
+    except (OSError, ValueError):
+        return os.path.basename(abs_root.rstrip(os.sep))
+    if rel == "." or rel.startswith(".."):
+        return os.path.basename(abs_root.rstrip(os.sep))
+    return rel.replace("\\", "/")
+
+
 def default_out_dir() -> str:
     """清单产物的默认输出目录（skill-catalog-scanner/scan-results）。"""
     return str(skills_dir() / "skill-catalog-scanner" / "scan-results")
@@ -171,8 +187,9 @@ def run(root: str | None = None, out: str | None = None, check: bool = False) ->
         return 2
 
     skills = scan(root)
-    md = render_markdown(skills, root)
-    js = render_json(skills, root)
+    shown_root = display_root(root)
+    md = render_markdown(skills, shown_root)
+    js = render_json(skills, shown_root)
 
     out_dir = out or default_out_dir()
     md_path = os.path.join(out_dir, "skill-catalog.md")
